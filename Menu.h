@@ -8,7 +8,16 @@
 #include "Mesas.h"
 #include "Productos.h"
 
-void menuPrincipal(void);
+void menuListadoProductos(void);
+void menuProductos(void);
+void menuMesasIndividual(void);
+void menuListadoMesas(void);
+void menuMesas(void);
+void menuListadoClientes(void);
 void menuClientes(void);
+void menuPrincipal(void);
+
+
+
 
 #endif /* Menu_h */
