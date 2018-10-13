@@ -9,6 +9,8 @@
 #ifndef Clientes_h
 #define Clientes_h
 
-#include <stdio.h>
+#include "Funciones.h"
+
+Cliente altaCliente(void);
 
 #endif /* Clientes_h */

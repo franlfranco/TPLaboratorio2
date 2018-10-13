@@ -13,8 +13,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-//void imprimir(void);
+//archivos
+//char aClientes[]={"Clientes.dat"};
+//char aMesas[]={"Mesas.dat"};
+//char aProductos[]={"Productos.dat"};
 
+//Estructuras
 typedef struct{ // Arbol de productos
     char nombre[20];
     int precio;

@@ -9,5 +9,6 @@
 #include "Productos.h"
 
 void menuPrincipal(void);
+void menuClientes(void);
 
 #endif /* Menu_h */

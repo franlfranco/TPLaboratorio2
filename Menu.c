@@ -790,6 +790,7 @@ void menuListadoClientes(){
 void menuClientes(void){
     char repite = 1;
     int opcion = -1;
+    Cliente aux;
     
     do {
         system("cls");
@@ -808,7 +809,7 @@ void menuClientes(void){
         switch (opcion) {
                 
             case 1:
-                //altaCliente;
+                aux=altaCliente();
                 break;
                 
             case 2:
@@ -835,9 +836,6 @@ void menuPrincipal(void){
     char repite = 1;
     int opcion = -1;
     
-    //generarHabitacion();
-    
-    
     do {
         system("cls");
         tituloPrincipal();
@@ -854,7 +852,7 @@ void menuPrincipal(void){
         switch (opcion) {
                 
             case 1:
-                //menuClientes();
+                menuClientes();
                 break;
             case 2:
                 //menuMesas();
