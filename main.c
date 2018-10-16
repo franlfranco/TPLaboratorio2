@@ -5,6 +5,9 @@
 #include "Menu.h"
 
 int main() {
-    menuPrincipal();
+    Mesa * listaMesa=inicMesa();
+    listaMesa=crearMesa(1);
+    
+    //menuPrincipal();
     return 0;
 }

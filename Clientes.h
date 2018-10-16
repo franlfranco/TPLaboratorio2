@@ -11,6 +11,4 @@
 
 #include "Funciones.h"
 
-Cliente altaCliente(void);
-
 #endif /* Clientes_h */

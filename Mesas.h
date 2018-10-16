@@ -9,6 +9,6 @@
 #ifndef Mesas_h
 #define Mesas_h
 
-#include <stdio.h>
+#include "Funciones.h"
 
 #endif /* Mesas_h */

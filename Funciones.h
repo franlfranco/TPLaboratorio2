@@ -19,12 +19,11 @@
 //char aProductos[]={"Productos.dat"};
 
 //Estructuras
-typedef struct{ // Arbol de productos
+typedef struct{ // Lista de productos
     char nombre[20];
     int precio;
     int cantidad;
-    struct Producto * izq;
-    struct Producto * der;
+    struct Producto * sig;
 } Producto;
 
 typedef struct{ // Lista doble de clientes
@@ -38,11 +37,13 @@ typedef struct{ // Fila de clientes
     struct Fila * cola;
 } Fila;
 
-typedef struct{ // Lista simple de mesas
+typedef struct{ // Arbol de mesas
+    int numero;//Identificacion de la mesa
     Producto productos[20];
     Cliente cliente;
     int ocupada; // variable booleana
-    struct Mesa * sig;
+    struct Mesa * izq;
+    struct Mesa * der;
 } Mesa;
 
 void tituloPrincipal(void);
