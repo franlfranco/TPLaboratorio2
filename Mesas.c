@@ -9,10 +9,11 @@ nodoMesa * inicListaMesa(void){
     return NULL;
 }
 
-Mesa crearMesa(int sucursal, int ultimaMesa){
+Mesa crearMesa(int numero){
     Mesa nueva;
+    
     nueva.ocupada=0;
-    nueva.numero=ultimaMesa+1;
+    nueva.numero=numero;
     
     return nueva;
 }
@@ -24,20 +25,46 @@ nodoMesa * crearNodoMesa(Mesa mesa){
     return aux;
 }
 
-
-
-int buscarUltimaMesa(nodoMesa * listaMesa){
-    int rta=0;
-    
+nodoMesa * buscarUltimoNodoMesa(nodoMesa * listaMesa){
+    nodoMesa * aux=listaMesa;
+    while(aux->sig){
+        aux=aux->sig;
+    }
+    return aux;
 }
 
-nodoMesa * altaMesa(nodoMesa * listaMesa, n){
-    int sucursal;
-    
-    printf("\n\t\t\t------- CARGA MESA -------\n");
-    printf("\t\tSucursal: ");
-    fflush(stdin);
-    scanf("%i",&sucursal);
-    
-    crearNodoMesa(crearMesa(sucursal,buscarUltimaMesa()))
+nodoMesa * agregarMesaFinal(nodoMesa * listaMesa, nodoMesa * nuevo){
+    if(!listaMesa){
+        listaMesa=nuevo;
+    }else{
+        nodoMesa * aux=buscarUltimoNodoMesa(listaMesa);
+        aux->sig=nuevo;
+    }
+    return listaMesa;
+}
+
+int buscarUltimaMesa(nodoMesa * listaMesa){//Funcion que retorna la cantidad de mesas cargadas
+    int rta=0;
+    if(listaMesa){
+        nodoMesa * cursor=listaMesa;
+        while (cursor) {
+            cursor=cursor->sig;
+            rta++;
+        }
+    }
+    return rta;
+}
+
+void mostrarMesa(nodoMesa * aux){
+    printf("\nNumero mesa: %i",aux->mesa.numero);
+    printf("\nOcupada: %i\n",aux->mesa.ocupada);
+}
+
+void mostrarMesasLibres(nodoMesa * listaMesa){
+    if(listaMesa){
+        if(listaMesa->mesa.ocupada==0){
+            mostrarMesa(listaMesa);
+            mostrarMesasLibres(listaMesa->sig);
+        }
+    }
 }

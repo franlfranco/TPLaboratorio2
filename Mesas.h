@@ -11,4 +11,20 @@
 
 #include "Funciones.h"
 
+nodoMesa * inicListaMesa(void);
+
+Mesa crearMesa(int numero);
+
+nodoMesa * crearNodoMesa(Mesa mesa);
+
+nodoMesa * buscarUltimoNodoMesa(nodoMesa * listaMesa);
+
+nodoMesa * agregarMesaFinal(nodoMesa * listaMesa, nodoMesa * nuevo);
+
+int buscarUltimaMesa(nodoMesa * listaMesa);
+
+void mostrarMesa(nodoMesa * aux);
+
+void mostrarMesasLibres(nodoMesa * listaMesa);
+
 #endif /* Mesas_h */

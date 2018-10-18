@@ -5,7 +5,13 @@
 #include "Menu.h"
 
 int main() {
+    nodoMesa * listaMesa;
+    listaMesa=inicListaMesa();
+    listaMesa=agregarMesaFinal(listaMesa,crearNodoMesa(crearMesa(buscarUltimaMesa(listaMesa)+1)));
+    listaMesa=agregarMesaFinal(listaMesa,crearNodoMesa(crearMesa(buscarUltimaMesa(listaMesa)+1)));
+    listaMesa=agregarMesaFinal(listaMesa,crearNodoMesa(crearMesa(buscarUltimaMesa(listaMesa)+1)));
     
-    menuPrincipal();
+    mostrarMesasLibres(listaMesa);
+    //menuPrincipal();
     return 0;
 }

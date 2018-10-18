@@ -1,17 +1,10 @@
-//
-//  Funciones.h
-//  TPFinalLabo2
-//
-//  Created by Francisco Franco on 12/10/2018.
-//  Copyright © 2018 Francisco Franco. All rights reserved.
-//
-
 #ifndef Funciones_h
 #define Funciones_h
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+//#define ARCHIMESAS "mesas.dat"
 
 //archivos
 //char aClientes[]={"Clientes.dat"};
@@ -32,7 +25,6 @@ typedef struct{ // Lista doble de clientes
 
 typedef struct{ // Lista simple de mesas
     int numero;//Identificacion de la mesa
-    int sucursal;
     int ocupada; // variable booleana
 } Mesa;
 
