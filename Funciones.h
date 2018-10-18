@@ -23,7 +23,6 @@ typedef struct{ // Lista de productos
     char nombre[20];
     int precio;
     int cantidad;
-    struct Producto * sig;
 } Producto;
 
 typedef struct{ // Lista doble de clientes
@@ -31,20 +30,45 @@ typedef struct{ // Lista doble de clientes
     int atendido; // variable booleana
 } Cliente;
 
-typedef struct{ // Fila de clientes
+typedef struct{ // Lista simple de mesas
+    int numero;//Identificacion de la mesa
+    int sucursal;
+    int ocupada; // variable booleana
+} Mesa;
+
+typedef struct{
+    Producto producto;
+    struct nodoProducto * sig;
+}nodoProducto;
+
+typedef struct{
     Cliente cliente;
-    struct Fila * cabecera;
-    struct Fila * cola;
+    struct nodoCliente * sig;
+    struct nodoCliente * ante;
+} nodoCliente;
+
+typedef struct{ // Fila de clientes
+    struct nodoCliente * cabecera;
+    struct nodoCliente * cola;
 } Fila;
 
-typedef struct{ // Arbol de mesas
-    int numero;//Identificacion de la mesa
-    Producto productos[20];
+typedef struct{
+    Mesa mesa;
+    struct nodoMesa * sig;
+} nodoMesa;
+
+typedef struct{
+    Mesa mesa;
     Cliente cliente;
-    int ocupada; // variable booleana
-    struct Mesa * izq;
-    struct Mesa * der;
-} Mesa;
+    Producto producto[20];
+    struct arbolCuenta * der;
+    struct arbolCuenta * izq;
+}arbolCuenta;
+
+typedef struct{
+    arbolCuenta * arbol;
+    struct sucursal * sig;
+} sucursal;
 
 void tituloPrincipal(void);
 

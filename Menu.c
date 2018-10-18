@@ -252,7 +252,7 @@ void menuListadoClientes(void){
 void menuClientes(void){
     char repite = 1;
     int opcion = -1;
-    Cliente aux;
+    //Cliente aux;
     
     do {
         system("cls");
@@ -271,7 +271,7 @@ void menuClientes(void){
         switch (opcion) {
                 
             case 1:
-                aux=altaCliente();
+                //aux=altaCliente();
                 break;
                 
             case 2:
