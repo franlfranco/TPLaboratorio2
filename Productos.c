@@ -1,28 +1,22 @@
-//
-//  Productos.c
-//  TPFinalLabo2
-//
-//  Created by Francisco Franco on 12/10/2018.
-//  Copyright © 2018 Francisco Franco. All rights reserved.
-//
+//Trabajo práctico final Laboratorio 2
+//Matias Ceraño - Francisco Franco - Luca Ciriaco
+//#LaVacaBar
+//Libreria Productos
 
 #include "Productos.h"
 
-nodoProd * inicListaProd ()
-{
+nodoProd * inicListaProd (void){
     return NULL;
 }
 
-nodoProd * crearNodoProd (Producto nuevo)
-{
+nodoProd * crearNodoProd (Producto nuevo){
     nodoProd * aux=(nodoProd*)malloc(sizeof(nodoProd));
     aux->prod=nuevo;
     aux->sig=NULL;
     return aux;
 }
 
-nodoProd * agregarProductoLista (nodoProd * lista,nodoProd * nuevo) ///EN EJECUCION
-{
+nodoProd * agregarProductoLista (nodoProd * lista,nodoProd * nuevo){ ///EN EJECUCION
     if(!lista)
         lista=nuevo;
     else
@@ -32,26 +26,25 @@ nodoProd * agregarProductoLista (nodoProd * lista,nodoProd * nuevo) ///EN EJECUC
             cursor=cursor->sig;
         cursor->sig=nuevo;
     }
-return lista;
+    return lista;
 }
 
 /*  IDEA DE MUESTRA DE CUENTA
-void mostrarListaCuenta (nodoProd * lista)
-{
-    printf("\n----------------Productos--------------------\n");
-    float total=0;
-    while(lista)
-    {
-        printf("%30s   ||$ %.2f\n",lista->prod.nombre,lista->prod.precio);
-        total=total+lista->prod.precio;
-        lista=lista->sig;
-    }
-    printf("\n\nTotal: $ %.2f\n",total);
-    printf("\n---------------------------------------------\n");
-}*/
+ void mostrarListaCuenta (nodoProd * lista)
+ {
+ printf("\n----------------Productos--------------------\n");
+ float total=0;
+ while(lista)
+ {
+ printf("%30s   ||$ %.2f\n",lista->prod.nombre,lista->prod.precio);
+ total=total+lista->prod.precio;
+ lista=lista->sig;
+ }
+ printf("\n\nTotal: $ %.2f\n",total);
+ printf("\n---------------------------------------------\n");
+ }*/
 
-void nuevoProducto (char archivoProducto[]) ///AGREGA UN PRODUCTO AL ARCHIVO
-{
+void nuevoProducto (char archivoProducto[]){ ///AGREGA UN PRODUCTO AL ARCHIVO
     Producto nuevo;
     char control='s';
     do
@@ -77,8 +70,7 @@ void nuevoProducto (char archivoProducto[]) ///AGREGA UN PRODUCTO AL ARCHIVO
     system("cls");
 }
 
-nodoProd * archivoToListaProducto (char archivoProducto[],nodoProd * listaProd) ///CARGA DESDE EL ARCHIVO DE MESA AL ARREGLO, RETORNA VALIDOS
-{
+nodoProd * archivoToListaProducto (char archivoProducto[],nodoProd * listaProd){ ///CARGA DESDE EL ARCHIVO DE PRODUCTO AL ARREGLO
     if(fopen(archivoProducto,"rb"))
     {
         FILE * archi=fopen(archivoProducto,"rb");
@@ -90,8 +82,8 @@ nodoProd * archivoToListaProducto (char archivoProducto[],nodoProd * listaProd) 
     }
     else
     {
-       printf("No se encontro el archivo...");
-       listaProd=inicListaProd();
+        printf("No se encontro el archivo...");
+        listaProd=inicListaProd();
     }
-return listaProd;
+    return listaProd;
 }

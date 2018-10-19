@@ -1,4 +1,8 @@
-//Libreria con el titulo principal
+//Trabajo práctico final Laboratorio 2
+//Matias Ceraño - Francisco Franco - Luca Ciriaco
+//#LaVacaBar
+//Libreria Funciones
+
 #include "Funciones.h"
 
 //archivos

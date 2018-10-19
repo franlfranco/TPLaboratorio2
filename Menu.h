@@ -1,4 +1,7 @@
-//Prototipado de menu
+//Trabajo práctico final Laboratorio 2
+//Matias Ceraño - Francisco Franco - Luca Ciriaco
+//#LaVacaBar
+//Libreria Menu
 
 #ifndef Menu_h
 #define Menu_h

@@ -4,18 +4,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-//#define ARCHIMESAS "mesas.dat"
-
-//archivos
-//char aClientes[]={"Clientes.dat"};
-//char aMesas[]={"Mesas.dat"};
-//char aProductos[]={"Productos.dat"};
+#include <ctype.h>
 
 //Estructuras
 typedef struct{ // Lista de productos
-    char nombre[20];
-    int precio;
-    int cantidad;
+    char nombre[30];
+    float precio;
+    int cantVendidos;
 } Producto;
 
 typedef struct{ // Lista doble de clientes
@@ -29,9 +24,9 @@ typedef struct{ // Lista simple de mesas
 } Mesa;
 
 typedef struct{
-    Producto producto;
-    struct nodoProducto * sig;
-}nodoProducto;
+    Producto prod;
+    struct nodoProd * sig;
+}nodoProd;
 
 typedef struct{
     Cliente cliente;
@@ -52,15 +47,10 @@ typedef struct{
 typedef struct{
     Mesa mesa;
     Cliente cliente;
-    Producto producto[20];
+    nodoProd * listaProd;
     struct arbolCuenta * der;
     struct arbolCuenta * izq;
 }arbolCuenta;
-
-typedef struct{
-    arbolCuenta * arbol;
-    struct sucursal * sig;
-} sucursal;
 
 void tituloPrincipal(void);
 

@@ -9,15 +9,6 @@ nodoMesa * inicListaMesa(void){
     return NULL;
 }
 
-Mesa crearMesa(int numero){
-    Mesa nueva;
-    
-    nueva.ocupada=0;
-    nueva.numero=numero;
-    
-    return nueva;
-}
-
 nodoMesa * crearNodoMesa(Mesa mesa){
     nodoMesa * aux=(nodoMesa*)malloc(sizeof(nodoMesa));
     aux->mesa=mesa;
@@ -43,16 +34,53 @@ nodoMesa * agregarMesaFinal(nodoMesa * listaMesa, nodoMesa * nuevo){
     return listaMesa;
 }
 
-int buscarUltimaMesa(nodoMesa * listaMesa){//Funcion que retorna la cantidad de mesas cargadas
-    int rta=0;
-    if(listaMesa){
-        nodoMesa * cursor=listaMesa;
-        while (cursor) {
-            cursor=cursor->sig;
-            rta++;
-        }
+void nuevaMesa (char archivoMesas[],int ultimaMesa){ ///AGREGA UNA MESA AL ARCHIVO CON EL NUMERO ULTIMO+1
+    Mesa nueva;
+    nueva.numero=ultimaMesa+1;
+    nueva.ocupada=0;
+    FILE * archi=fopen(archivoMesas,"ab");
+    fwrite(&nueva,sizeof(Mesa),1,archi);
+    fclose(archi);
+    printf("Carga de la mesa nro: %i fue exitosa\n",nueva.numero);
+    system("pause");
+    system("cls");
+}
+
+int buscarUltimaMesa (char archivoMesas[]){ ///RETORNA ULTIMO NUMERO DE MESA / 0 SI NO HAY ARCHIVO
+    int rta;
+    if(fopen(archivoMesas,"rb"))
+    {
+        Mesa aux;
+        FILE * archi=fopen(archivoMesas,"rb");
+        fseek(archi,sizeof(Mesa)*-1,SEEK_END);
+        fread(&aux,sizeof(Mesa),1,archi);
+        rta=aux.numero;
+        fclose(archi);
+    }
+    else
+    {
+        printf("Archivo - %s - no encontrado...\n",archivoMesas);
+        rta=0;
     }
     return rta;
+}
+
+nodoMesa * archivoToListaMesa (char archivoMesas[], nodoMesa * listaMesa){ ///CARGA DESDE EL ARCHIVO DE MESA AL ARREGLO, RETORNA VALIDOS
+    if(fopen(archivoMesas,"rb"))
+    {
+        FILE * archi=fopen(archivoMesas,"rb");
+        Mesa aux;
+        while(fread(&aux,sizeof(Mesa),1,archi)>0)
+        {
+            listaMesa=agregarMesaFinal(listaMesa, crearNodoMesa(aux));
+        }
+        fclose(archi);
+    }
+    else
+    {
+        printf("No se encontro el archivo...");
+    }
+    return listaMesa;
 }
 
 void mostrarMesa(nodoMesa * aux){
@@ -68,3 +96,4 @@ void mostrarMesasLibres(nodoMesa * listaMesa){
         }
     }
 }
+
