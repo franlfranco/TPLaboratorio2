@@ -16,23 +16,6 @@ nodoProd * agregarProductoLista (nodoProd * lista,nodoProd * nuevo); ///EN EJECU
 
 void nuevoProducto (char archivoProducto[]); ///AGREGA UN PRODUCTO AL ARCHIVO
 
-nodoProd * archivoToListaProducto (char archivoProducto[],nodoProd * listaProd){ ///CARGA DESDE EL ARCHIVO DE PRODUCTO AL ARREGLO
-    if(fopen(archivoProducto,"rb"))
-    {
-        FILE * archi=fopen(archivoProducto,"rb");
-        Producto aux;
-        while(fread(&aux,sizeof(Producto),1,archi)>0)
-        {
-            listaProd=agregarProductoLista(listaProd,crearNodoProd(aux));
-        }
-    }
-    else
-    {
-        printf("No se encontro el archivo...");
-        listaProd=inicListaProd();
-    }
-    return listaProd;
-}
-
+nodoProd * archivoToListaProducto (char archivoProducto[],nodoProd * listaProd); ///CARGA DESDE EL ARCHIVO DE PRODUCTO AL ARREGLO
 
 #endif /* Productos_h */
