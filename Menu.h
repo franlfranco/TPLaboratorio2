@@ -10,13 +10,14 @@
 #include "Clientes.h"
 #include "Mesas.h"
 #include "Productos.h"
+#include "Comanda.h"
 
-void menuListadoProductos(void);
+void menunodoClienteoProductos(void);
 void menuProductos(void);
 void menuMesasIndividual(void);
-void menuListadoMesas(void);
+void menunodoClienteoMesas(void);
 void menuMesas(void);
-void menuListadoClientes(void);
+void menunodoClienteoClientes(void);
 void menuClientes(void);
 void menuPrincipal(void);
 

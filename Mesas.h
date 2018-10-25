@@ -20,17 +20,17 @@ Mesa nuevaMesaArchivo (char archivoMesas[],int ultimaMesa); ///AGREGA UNA MESA A
 
 int buscarUltimaMesaArchivo (char archivoMesas[]); ///RETORNA ULTIMO NUMERO DE MESA / 0 SI NO HAY ARCHIVO
 
-nodoMesa * buscarUltimaMesaLista(nodoMesa * listaMesa);
+nodoMesa * buscarUltimaMesaLista(nodoMesa * listaMesa);//Retorna el ultimo nodo de la lista de mesas
 
-nodoMesa * nuevaMesaLista(nodoMesa * listaMesa, nodoMesa * nuevo);
+nodoMesa * agregarFinalListaMesa(nodoMesa * listaMesa, nodoMesa * nuevo);//Agrega una mesa al final de la LISTA de mesas
 
-void altaMesa(char archivoMesas[], nodoMesa * listaMesas);
+void altaMesa(char archivoMesas[], nodoMesa * listaMesas);//Llama a las funciones que agregan Mesa al archivo y a la lista, FUNCION AL MENU
 
-nodoMesa * archivoToListaMesa (char archivoMesas[], nodoMesa * listaMesa); ///CARGA DESDE EL ARCHIVO DE MESA A LA LISTA
+nodoMesa * archivoToListaMesa (char archivoMesas[], nodoMesa * listaMesa); //Carga la LISTA mesa con los datos del archivo
 
-void mostrarMesa(nodoMesa * aux);
+void mostrarMesa(nodoMesa * aux);//Muestra los datos de un nodoMesa
 
-void mostrarMesasLibres(nodoMesa * listaMesa);
+int mostrarMesasLibres(nodoMesa * listaMesa);//Llama a mostrarMesa con todos los nodos de la lista de mesa
 
 nodoMesa * bajaMesaLista(nodoMesa * listaMesa);
 

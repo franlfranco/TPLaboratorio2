@@ -5,7 +5,7 @@
 
 #include "Menu.h"
 
-void menuListadoProductos(void){
+void menunodoClienteoProductos(void){
     char repite = 1;
     int opcion = -1;
     
@@ -13,7 +13,7 @@ void menuListadoProductos(void){
         system("cls");//NO FUNCIONA EN MAC, SOLO EN WINDOWS
         tituloPrincipal();
         
-        printf("\n\t\t\t\tSUBMENU LISTADO PRODUCTOS\n");
+        printf("\n\t\t\t\tSUBMENU nodoClienteO PRODUCTOS\n");
         printf("\n\t\t[1]. Por Producto\n");
         printf("\t\t[2]. Por tipo\n");
         printf("\t\t[0]. Volver\n");
@@ -47,11 +47,11 @@ void menuProductos(void){
         system("cls");//NO FUNCIONA EN MAC, SOLO EN WINDOWS
         tituloPrincipal();
         
-        printf("\n\t\t\t\tSUBMENU TODOS LISTADO PACIENTE\n");
+        printf("\n\t\t\t\tSUBMENU TODOS nodoClienteO PACIENTE\n");
         printf("\n\t\t[1]. Alta\n");
         printf("\t\t[2]. Baja\n");
         printf("\t\t[3]. Modificacion\n");
-        printf("\t\t[4]. Listado\n");
+        printf("\t\t[4]. nodoClienteo\n");
         printf("\t\t[5]. Venta en barra\n");
         printf("\t\t[0]. Volver\n");
         printf("\n\t\tIngrese su opcion: ");
@@ -73,7 +73,7 @@ void menuProductos(void){
                 break;
                 
             case 4:
-                menuListadoProductos();
+                menunodoClienteoProductos();
                 break;
                 
             case 5:
@@ -122,7 +122,7 @@ void menuMesasIndividual(void){
     } while (repite);
 }
 
-void menuListadoMesas(void){
+void menunodoClienteoMesas(void){
     char repite = 1;
     int opcion = -1;
     
@@ -130,7 +130,7 @@ void menuListadoMesas(void){
         system("cls");//NO FUNCIONA EN MAC, SOLO EN WINDOWS
         tituloPrincipal();
         
-        printf("\n\t\t\t\tSUBMENU LISTADOS MESAS\n");
+        printf("\n\t\t\t\tSUBMENU nodoClienteOS MESAS\n");
         printf("\n\t\t[1]. Individual\n");
         printf("\t\t[2]. Todas\n");
         printf("\t\t[3]. Ocupadas\n");
@@ -176,7 +176,7 @@ void menuMesas(void){
         printf("\n\t\t\t\tSUBMENU MESAS\n");
         printf("\n\t\t[1]. Alta\n");
         printf("\t\t[2]. Baja\n");
-        printf("\t\t[3]. Listado\n");
+        printf("\t\t[3]. nodoClienteo\n");
         printf("\t\t[4]. Modificar\n");
         printf("\t\t[5]. Cerrar\n");
         printf("\t\t[0]. Volver\n");
@@ -195,7 +195,7 @@ void menuMesas(void){
                 break;
             
             case 3:
-                menuListadoMesas();
+                menunodoClienteoMesas();
                 break;
                 
             case 4:
@@ -214,7 +214,7 @@ void menuMesas(void){
     } while (repite);
 }
 
-void menuListadoClientes(void){
+void menunodoClienteoClientes(void){
     char repite = 1;
     int opcion = -1;
     
@@ -222,7 +222,7 @@ void menuListadoClientes(void){
         system("cls");//NO FUNCIONA EN MAC, SOLO EN WINDOWS
         tituloPrincipal();
         
-        printf("\n\t\t\t\tSUBMENU LISTADO CLIENTES\n");
+        printf("\n\t\t\t\tSUBMENU nodoClienteO CLIENTES\n");
         printf("\n\t\t[1]. Todos\n");
         printf("\t\t[2]. Atendidos\n");
         printf("\t\t[3]. En espera\n");
@@ -266,7 +266,7 @@ void menuClientes(void){
         printf("\n\t\t[1]. Alta\n");
         printf("\t\t[2]. Atención\n");
         printf("\t\t[3]. Baja\n");
-        printf("\t\t[4]. Listado\n");
+        printf("\t\t[4]. nodoClienteo\n");
         printf("\t\t[0]. Volver\n");
         printf("\n\t\tIngrese su opcion: ");
         fflush(stdin);
@@ -287,7 +287,7 @@ void menuClientes(void){
                 break;
             
             case 4:
-                menuListadoClientes();
+                menunodoClienteoClientes();
                 break;
                 
             case 0:

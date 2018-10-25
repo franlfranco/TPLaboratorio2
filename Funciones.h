@@ -11,17 +11,17 @@ typedef struct{ // Lista de productos
     char nombre[30];
     float precio;
     int cantVendidos;
-} Producto;
+}Producto;
 
 typedef struct{ // Lista doble de clientes
     char nombre[20];
     int atendido; // variable booleana
-} Cliente;
+}Cliente;
 
 typedef struct{ // Lista simple de mesas
     int numero;//Identificacion de la mesa
     int ocupada; // variable booleana
-} Mesa;
+}Mesa;
 
 typedef struct{
     Producto prod;
@@ -32,17 +32,17 @@ typedef struct{
     Cliente cliente;
     struct nodoCliente * sig;
     struct nodoCliente * ante;
-} nodoCliente;
+}nodoCliente;
 
 typedef struct{ // Fila de clientes
     struct nodoCliente * cabecera;
-    struct nodoCliente * cola;
-} Fila;
+    struct nodoCliente * ultimo;
+}Fila;
 
 typedef struct{
     Mesa mesa;
     struct nodoMesa * sig;
-} nodoMesa;
+}nodoMesa;
 
 typedef struct{
     Mesa mesa;

@@ -16,7 +16,7 @@ nodoMesa * crearNodoMesa(Mesa mesa){
     return aux;
 }
 
-nodoMesa * buscarUltimoNodoMesa(nodoMesa * listaMesa){
+nodoMesa * buscarUltimoNodoMesa(nodoMesa * listaMesa){//Busca ultimo nodo de la LISTA mesa
     nodoMesa * aux=listaMesa;
     while(aux->sig){
         aux=aux->sig;
@@ -75,7 +75,7 @@ nodoMesa * buscarUltimaMesaLista(nodoMesa * listaMesa){
     return listaMesa;
 }
 
-nodoMesa * nuevaMesaLista(nodoMesa * listaMesa, nodoMesa * nuevo){
+nodoMesa * agregarFinalListaMesa(nodoMesa * listaMesa, nodoMesa * nuevo){
     nodoMesa * ultimo=buscarUltimaMesaLista(listaMesa);
     if(listaMesa){
         ultimo->sig=nuevo;
@@ -87,7 +87,7 @@ nodoMesa * nuevaMesaLista(nodoMesa * listaMesa, nodoMesa * nuevo){
 
 void altaMesa(char archivoMesas[], nodoMesa * listaMesas){
     Mesa nueva=nuevaMesaArchivo(archivoMesas, buscarUltimaMesaArchivo(archivoMesas));
-    listaMesas=nuevaMesaLista(listaMesas, crearNodoMesa(nueva));
+    listaMesas=agregarFinalListaMesa(listaMesas, crearNodoMesa(nueva));
 }
 
 nodoMesa * archivoToListaMesa (char archivoMesas[], nodoMesa * listaMesa){ ///CARGA DESDE EL ARCHIVO DE MESA A LA LISTA, RETORNA VALIDOS
@@ -113,13 +113,20 @@ void mostrarMesa(nodoMesa * aux){
     printf("\nOcupada: %i\n",aux->mesa.ocupada);
 }
 
-void mostrarMesasLibres(nodoMesa * listaMesa){
-    if(listaMesa){
-        if(listaMesa->mesa.ocupada==0){
-            mostrarMesa(listaMesa);
-            mostrarMesasLibres(listaMesa->sig);
+int mostrarMesasLibres (nodoMesa * lista) ///MUESTRA MESAS LIBRES, RETORNA CANTIDAD / 0 SI NO HAY
+{
+    int rta=0;
+    printf("\n--Mesas libres--\n");
+    while(lista)
+    {
+        if(lista->mesa.ocupada==0)
+        {
+            printf("Mesa: %i\n",lista->mesa.numero);
+            rta++;
         }
+        lista=lista->sig;
     }
+    return rta;
 }
 
 nodoMesa * bajaMesaLista(nodoMesa * listaMesa){

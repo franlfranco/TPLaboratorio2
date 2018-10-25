@@ -87,3 +87,12 @@ nodoProd * archivoToListaProducto (char archivoProducto[],nodoProd * listaProd){
     }
     return listaProd;
 }
+
+void mostrarListProductos(nodoProd * listaProd)
+{
+    if(listaProd)
+    {
+        printf("\nProducto: %s |Precio: $ %.2f |Cant. Vendidos: %i\n",listaProd->prod.nombre,listaProd->prod.precio,listaProd->prod.cantVendidos);
+        mostrarListProductos(listaProd->sig);
+    }
+}
