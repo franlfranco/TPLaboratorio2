@@ -11,11 +11,21 @@ int main() {
     char aMesasTemp[]={"MesasTemp.dat"};
     
     nodoMesa * listaMesa;
-    listaMesa=inicListaMesa();
+    
+    nodoProd * listaProd;
     
     listaMesa=archivoToListaMesa(aMesas, listaMesa);
+    listaProd=archivoToListaProducto(aProductos, listaProd);
     
-    testFila();
+    altaProducto(aProductos, listaProd);
+    altaProducto(aProductos, listaProd);
+    altaProducto(aProductos, listaProd);
+    bajaProducto(listaProd, aProductos);
+    
+    mostrarListProductos(listaProd);
+    ///testFila();
+    
+    //mostrarMesasLibres(listaMesa);
     
     return 0;
 }

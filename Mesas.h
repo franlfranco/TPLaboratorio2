@@ -30,12 +30,14 @@ nodoMesa * archivoToListaMesa (char archivoMesas[], nodoMesa * listaMesa); //Car
 
 void mostrarMesa(nodoMesa * aux);//Muestra los datos de un nodoMesa
 
-int mostrarMesasLibres(nodoMesa * listaMesa);//Llama a mostrarMesa con todos los nodos de la lista de mesa
+void mostrarMesasLibres(nodoMesa * listaMesa);//Llama a mostrarMesa con todos los nodos de la lista de mesa
 
 nodoMesa * bajaMesaLista(nodoMesa * listaMesa);
 
 void bajaArchivoMesa(char archivoMesa[], char archivoMesaTemporal[], int pos);
 
 void bajaMesa(nodoMesa * listaMesa, char archivoMesa[], char archivoMesaTemporal[]);
+
+int chequearDisponibilidadMesas(nodoMesa * listaMesa);
 
 #endif /* Mesas_h */

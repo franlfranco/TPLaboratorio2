@@ -74,19 +74,14 @@ arbolCuenta * nuevaComanda(Mesa mesa,Cliente cliente){ ///CREA UNA COMANDA EN BA
     return aux;
 }
 
-int reservarMesa (nodoMesa * lista,Mesa * pedida,int nro) ///PIDE LISTA, STRUCT MESA VACIA Y NRO. RETORNA 0 SI NO ENCONTRO LIBRE EL NRO Y 1 SI ESTA OK
-{
+int reservarMesa (nodoMesa * lista,Mesa * pedida,int nro){ ///PIDE LISTA, STRUCT MESA VACIA Y NRO. RETORNA 0 SI NO ENCONTRO LIBRE EL NRO Y 1 SI ESTA OK
     int flag=0;
-    while(lista)
-    {
-        if(lista->mesa.numero==nro && lista->mesa.ocupada==0)
-        {
+    while(lista){
+        if(lista->mesa.numero==nro && lista->mesa.ocupada==0){
             lista->mesa.ocupada=1;
             *pedida=lista->mesa;
             flag=1;
-        }
-        else
-        {
+        }else{
             lista=lista->sig;
         }
         
@@ -94,14 +89,15 @@ int reservarMesa (nodoMesa * lista,Mesa * pedida,int nro) ///PIDE LISTA, STRUCT 
     return flag;
 }
 
-arbolCuenta * atenderCliente (nodoMesa * mesas)
+arbolCuenta * atenderCliente (nodoMesa * mesas, Fila * espera)
 {
     Cliente cliente;
     Mesa mesa;
     arbolCuenta * nuevo=inicArbol();
     cliente=nuevoCliente();
-    if(mostrarMesasLibres(mesas)) ///SI HAY MESAS DISPONIBLES
+    if(chequearDisponibilidadMesas(mesas)) ///SI HAY MESAS DISPONIBLES
     {
+        mostrarMesasLibres(mesas);
         int elegir;
         int flag=0; ///CONDICION DE CIERRE DEL DO WHILE
         do
@@ -109,12 +105,11 @@ arbolCuenta * atenderCliente (nodoMesa * mesas)
             printf("Ingrese el numero de Mesa para %s\n- ",cliente.nombre);
             fflush(stdin);
             scanf("%i",&elegir);
-            if(!reservarMesa(mesas,&mesa,elegir))
+            if(!reservarMesa(mesas,&mesa,elegir))//retorna 1 si la mesa esta libre
             {
                 printf("\nEl numero de mesa ingresada es incorrecto o esta ocupada... Ingrese nuevamente\n");
                 system("pause");
                 system("cls");
-                mostrarMesasLibres(mesas);
             }
             else
                 flag=1;
@@ -126,6 +121,7 @@ arbolCuenta * atenderCliente (nodoMesa * mesas)
     else ///MESAS LLENAS
     {
         printf("\nNo hay mesas disponibles... A la fila!\n");
+        agregarClienteAFila(espera, nuevo->cliente);
     }
     return nuevo;
 }

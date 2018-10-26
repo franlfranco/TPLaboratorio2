@@ -91,6 +91,7 @@ void altaMesa(char archivoMesas[], nodoMesa * listaMesas){
 }
 
 nodoMesa * archivoToListaMesa (char archivoMesas[], nodoMesa * listaMesa){ ///CARGA DESDE EL ARCHIVO DE MESA A LA LISTA, RETORNA VALIDOS
+    listaMesa=inicListaMesa();
     if(fopen(archivoMesas,"rb"))
     {
         FILE * archi=fopen(archivoMesas,"rb");
@@ -113,20 +114,17 @@ void mostrarMesa(nodoMesa * aux){
     printf("\nOcupada: %i\n",aux->mesa.ocupada);
 }
 
-int mostrarMesasLibres (nodoMesa * lista) ///MUESTRA MESAS LIBRES, RETORNA CANTIDAD / 0 SI NO HAY
+void mostrarMesasLibres (nodoMesa * lista) ///MUESTRA MESAS LIBRES, RETORNA CANTIDAD / 0 SI NO HAY
 {
-    int rta=0;
     printf("\n--Mesas libres--\n");
     while(lista)
     {
         if(lista->mesa.ocupada==0)
         {
             printf("Mesa: %i\n",lista->mesa.numero);
-            rta++;
         }
         lista=lista->sig;
     }
-    return rta;
 }
 
 nodoMesa * bajaMesaLista(nodoMesa * listaMesa){
@@ -148,7 +146,6 @@ nodoMesa * bajaMesaLista(nodoMesa * listaMesa){
     return listaMesa;
 }
 
-//ARMAR UNA FUNCION QUE LLAME A ESTA DE ACA ABAJO, EN ESA FUNCION BORRAR EL NODOMESA DE LA LISTAMESA
 void bajaArchivoMesa(char archivoMesa[], char archivoMesaTemporal[], int pos){//Elimina definitivo una mesa del archivo.
     //pasar buscarUltimaMesaArchivo como argumento en pos
     //Crear direccion de archivo temporal dentro de la funcion
@@ -194,4 +191,15 @@ void bajaMesa(nodoMesa * listaMesa, char archivoMesa[], char archivoMesaTemporal
     }else{
         printf("La mesa numero %i esta ocupada\n",ultimo->mesa.numero);
     }
+}
+
+int chequearDisponibilidadMesas(nodoMesa * listaMesa){
+    int rta=0;
+    while(listaMesa){
+        if(!listaMesa->mesa.ocupada){
+            rta++;
+        }
+        listaMesa=listaMesa->sig;
+    }
+    return rta;
 }

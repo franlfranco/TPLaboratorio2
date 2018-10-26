@@ -14,8 +14,20 @@ nodoProd * crearNodoProd (Producto nuevo);
 
 nodoProd * agregarProductoLista (nodoProd * lista,nodoProd * nuevo); ///EN EJECUCION
 
-void nuevoProducto (char archivoProducto[]); ///AGREGA UN PRODUCTO AL ARCHIVO
+int chequearProducto(char archivoProducto[],char nombre[30]);///Retorna 1 si el nombre ya esta en el archivo
+
+Producto altaProductoArchivo(char archivoProducto[]); ///AGREGA UN PRODUCTO AL ARCHIVO
 
 nodoProd * archivoToListaProducto (char archivoProducto[],nodoProd * listaProd); ///CARGA DESDE EL ARCHIVO DE PRODUCTO AL ARREGLO
+
+void altaProducto(char archivoProd[], nodoProd * listaProd);///Funcion que llama a altaLista y altaArchivo, va en el menu
+
+void mostrarListProductos(nodoProd * listaProd);
+
+nodoProd * bajaListaProd(nodoProd * listaProd, char nombre[30]);///Da de baja un nodo de la lista de Productos
+
+void bajaArchivoProducto(char archivoProducto[], char nombre[30]);///Da de baja un producto del archivo
+
+void bajaProducto(nodoProd * listaProd,char archivoProducto[]);///Funcion que llama a bajarLista y bajarArchivo, va al menu
 
 #endif /* Productos_h */
