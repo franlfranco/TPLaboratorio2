@@ -127,9 +127,6 @@ void mostrarMesasLibres (nodoMesa * lista) ///MUESTRA MESAS LIBRES, RETORNA CANT
     }
 }
 
-
-
-
 nodoMesa * bajaMesaLista(nodoMesa * listaMesa){
     if(listaMesa){
         if(!listaMesa->sig){
@@ -148,54 +145,6 @@ nodoMesa * bajaMesaLista(nodoMesa * listaMesa){
     }
     return listaMesa;
 }
-
-/*
-void bajaArchivoMesa(char archivoMesa[], char archivoMesaTemporal[], int pos){//Elimina definitivo una mesa del archivo.
-    //pasar buscarUltimaMesaArchivo como argumento en pos
-    //Crear direccion de archivo temporal dentro de la funcion
-    pos--;
-    printf("\n--%i\n",pos);
-    if(pos>0)
-    {
-    puts("pos > 0");
-    Mesa m;
-    FILE *archivo;
-    FILE *temporal;
-    archivo = fopen(archivoMesa, "rb");
-    temporal = fopen(archivoMesaTemporal, "ab");
-    int i=0;
-    if (archivo == NULL || temporal == NULL) {
-        printf("Archivo - %s - no encontrado...\n",archivoMesa);
-        if(archivo==NULL){
-            printf("MESA\n");
-        }
-        if(temporal==NULL){
-            printf("TEMPORAL\n");
-        }
-    } else {
-        // Se copia en el archivo temporal los registros válidos
-        fread(&m, sizeof(Mesa), 1, archivo);
-        while (!feof(archivo)) {
-            if (i != pos) {
-                fwrite(&m, sizeof(Mesa), 1, temporal);
-            }
-            fread(&m, sizeof(Mesa), 1, archivo);
-            i++;
-        }
-        // Se cierran los archivos antes de borrar y renombrar
-        fclose(archivo);
-        fclose(temporal);
-        remove(archivoMesa);
-        rename(archivoMesaTemporal, archivoMesa);
-    }
-    }
-    else
-    {
-        printf("No hay mesas para borrar...\n");
-    }
-
-}
-*/
 
 void bajaArchivoMesa(char archivoMesa[],nodoMesa * listaMesasActualizada)
 {

@@ -52,7 +52,7 @@ Producto altaProductoArchivo(char archivoProducto[]){ ///AGREGA UN PRODUCTO AL A
         do {
             printf("Ingrese nombre del producto nuevo... \n");
             fflush(stdin);
-            gets(nuevo.nombre);
+            scanf("%s",nuevo.nombre);
             if(chequearProducto(archivoProducto, nuevo.nombre))
             {
                 printf("El nombre del producto ya existe, elija otro...\n");
@@ -174,7 +174,7 @@ void bajaProducto(nodoProd * * listaProd,char archivoProducto[]){ ///DE LISTA A 
         char nombre[30];
         printf("\nIngrese el producto a borrar: ");
         fflush(stdin);
-        gets(nombre);
+        scanf("%s",nombre);
         if (chequearProducto(archivoProducto, nombre)) {
             *listaProd=bajaListaProd(*listaProd, nombre);
             bajaArchivoProducto(aProductos,*listaProd);

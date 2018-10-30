@@ -23,7 +23,6 @@ arbolCuenta * agregarHojaArbolCuentas (arbolCuenta * arbol,arbolCuenta * nuevo){
     return arbol;
 }
 
-//Muestra de arbol
 void mostrarCuenta (nodoProd * lista){ ///MUESTRA LA LISTA DE PRODUCTOS PEDIDOS POR EL CLIENTE
     float total=0;
     printf("\n----------------Productos--------------------\n");
@@ -63,7 +62,6 @@ void mostrarArbolComandaenOrden (arbolCuenta * arbol){ ///MUESTRA EL ARBOL DE CO
     }
 }
 
-//Renombrar a crearNodoArbolCuenta
 arbolCuenta * crearHojaComanda(Mesa mesa,Cliente cliente){ ///CREA UNA COMANDA EN BASE A MESA Y CLIENTE, GENERA LISTA DE PEDIDOS VACIA
     arbolCuenta * aux=(arbolCuenta*)malloc(sizeof(arbolCuenta));
     aux->mesa=mesa;
@@ -102,7 +100,7 @@ arbolCuenta * ingresarClienteANodoArbol (nodoMesa * * listaMesa, Cliente nuevoCl
         printf("Ingrese el numero de Mesa para %s\n- ",nuevoCliente.nombre);
         fflush(stdin);
         scanf("%i",&elegir);
-        if(!ocuparMesa(*listaMesa,&mesa,elegir))//retorna 1 si la mesa esta libre
+        if(!ocuparMesa(listaMesa,&mesa,elegir))//retorna 1 si la mesa esta libre
         {
             printf("\nEl numero de mesa ingresada es incorrecto o esta ocupada. Ingrese nuevamente\n");
             system("pause");
@@ -175,7 +173,7 @@ arbolCuenta * sumarProductoCuenta (arbolCuenta * mesasOcupadas,nodoProd * cartaP
             printf("\n--------------------Carta--------------------\n");
             printf("Ingrese nombre del producto que desea agregar: ");
             fflush(stdin);
-            gets(nombreProducto);
+            scanf("%s",nombreProducto);
             if(chequearProducto(aMesas,nombreProducto))
             {
                 //nuevo=extraerProductoDeLista(cartaProductos,nombreProducto);

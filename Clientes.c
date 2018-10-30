@@ -9,7 +9,7 @@ Cliente nuevoCliente (void){ ///PIDE INGRESO DE NOMBRE Y RETORNA STRUCT CLIENTE
     Cliente nuevo;
     printf("\nIngresar nombre del cliente: ");
     fflush(stdin);
-    gets(nuevo.nombre);
+    scanf("%s",nuevo.nombre);
     nuevo.atendido=0;
     return nuevo;
 }
@@ -149,6 +149,10 @@ void testFila (void){
 void altaCliente(arbolCuenta * arbolCuentas, nodoMesa * * listaMesa, Fila * espera){
     Cliente nuevo=nuevoCliente();
     if(chequearDisponibilidadMesas(*listaMesa)){
-        arbolCuentas=agregarHojaArbolCuentas(arbolCuentas, ingresarClienteANodoArbol(*listaMesa, nuevo));
+        printf("Cliente al arbol\n");
+        arbolCuentas=agregarHojaArbolCuentas(arbolCuentas, ingresarClienteANodoArbol(listaMesa, nuevo));
+    }else{
+        agregarClienteAFila(espera, nuevo);
+        printf("Cliente a la fila\n");
     }
 }

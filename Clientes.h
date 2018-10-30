@@ -10,7 +10,7 @@
 #include "Mesas.h"
 #include "Comanda.h"
 
-Cliente nuevoCliente (void); // Pide nombre de cliente y retorna el dato Cliente
+Cliente nuevoCliente (void);//Pide nombre de cliente, retorna struct Cliente
 
 nodoCliente * inicNodoCliente (void);
 
@@ -18,16 +18,18 @@ nodoCliente * crearNodoCliente (Cliente cliente);
 
 Fila inicFila (void);
 
-nodoCliente * agregarFinalnodoCliente (nodoCliente * lista,nodoCliente * nuevo);
+nodoCliente * agregarFinalnodoCliente (nodoCliente * lista,nodoCliente * nuevo);//Agrega Cliente al final de la LISTA de clientes
 
-void mostrarListaCliente (nodoCliente * listaCliente);
+void mostrarListaCliente (nodoCliente * listaCliente);// Muestra LISTA de clientes
 
-void agregarClienteAFila (Fila * espera,Cliente ultimo);
+void agregarClienteAFila (Fila * espera,Cliente ultimo);//Agrega cliente a FILA de clientes en espera
 
-void mostrarFilaEspera (Fila espera);
+void mostrarFilaEspera (Fila espera);//Muestra la FILA de clientes en espera
 
-Cliente extraerClienteEspera (Fila * espera);
+Cliente extraerClienteEspera (Fila * espera);//Quita un cliente de la FILA de clientes en espera y retorna struct Cliente
 
-void testFila (void);
+void testFila (void);//Test Falopa
+
+void altaCliente(arbolCuenta * arbolCuentas, nodoMesa * * listaMesa, Fila * espera);//Atiende cliente o lo manda a lista de espera, funcion al menu
 
 #endif /* Clientes_h */

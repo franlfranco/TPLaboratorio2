@@ -12,14 +12,20 @@
 #include "Productos.h"
 #include "Comanda.h"
 
-void menunodoClienteoProductos(void);
+void menuCuentas(void);
+
 void menuProductos(nodoProd * * listaProductos);
+
+void menuListadoIndividualMesas(void);
+
+void menuListadoMesas(void);
+
 void menuMesas(nodoMesa * * listaMesas);
-void menunodoClienteoClientes(void);
-void menuClientes(void);
+
+void menuListadoClientes(void);
+
+void menuClientes(nodoMesa ** listaMesa, arbolCuenta ** arbolCuentas, Fila * espera);
+
 void menuPrincipal(void);
-
-
-
 
 #endif /* Menu_h */
