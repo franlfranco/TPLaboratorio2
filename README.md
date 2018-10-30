@@ -12,9 +12,8 @@ Nuestro sistema permite la gestión de cuentas activas, ventas en barra y lista 
     2. Atención -> si hay clientes en fila y mesas disponibles, asignar a la mesa, crear hoja arbol
     3. Baja (Solamente para clientes en fila)
     4. Listado
-        1. Todos
-        2. Atendidos
-        3. En espera
+        1. Atendidos
+        2. En espera
 2. Mesas
     1. Alta
     2. Baja
@@ -24,19 +23,16 @@ Nuestro sistema permite la gestión de cuentas activas, ventas en barra y lista 
             2. Por nombre cliente
         2. Todas
         3. Ocupadas
-        4. Tabla
+        4. Libres
+        5. Tabla
 3. Productos
     1. Alta
     2. Baja
     3. Modificación
-    4. Listado
-        1. Por producto
-        2. Por tipo
+    4. Listado por producto
     5. Venta en barra
 4. Cuentas
-    1. Listados
-        1. Activas
-        2. Cerradas
+    1. Listado cuentas activas
     2. Agregar productos
     3. Quitar productos
     4. Cerrar cuenta
