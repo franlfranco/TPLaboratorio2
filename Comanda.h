@@ -10,7 +10,7 @@
 
 arbolCuenta * inicArbol (void);
 
-arbolCuenta * nuevaCuenta (arbolCuenta * arbol,arbolCuenta * nuevo);
+arbolCuenta * agregarHojaArbolCuentas (arbolCuenta * arbol,arbolCuenta * nuevo);
 
 void mostrarCuenta (nodoProd * lista);
 
@@ -20,6 +20,10 @@ void mostrarComanda (arbolCuenta * comanda);
 
 void mostrarArbolComandaenOrden (arbolCuenta * arbol);
 
-arbolCuenta * nuevaComanda(Mesa mesa,Cliente cliente);
+int ocuparMesa (nodoMesa ** lista,Mesa * pedida,int nro);
+
+arbolCuenta * crearHojaComanda(Mesa mesa,Cliente cliente);
+
+arbolCuenta * ingresarClienteANodoArbol (nodoMesa * * listaMesa, Cliente nuevoCliente);//Ingresa un cliente a un nodoArbol, y asigna mesa
 
 #endif /* Comanda_h */

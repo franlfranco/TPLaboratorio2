@@ -24,7 +24,7 @@ nodoMesa * buscarUltimaMesaLista(nodoMesa * listaMesa);//Retorna el ultimo nodo 
 
 nodoMesa * agregarFinalListaMesa(nodoMesa * listaMesa, nodoMesa * nuevo);//Agrega una mesa al final de la LISTA de mesas
 
-void altaMesa(char archivoMesas[], nodoMesa * listaMesas);//Llama a las funciones que agregan Mesa al archivo y a la lista, FUNCION AL MENU
+void altaMesa(char archivoMesas[], nodoMesa * * listaMesas);//Llama a las funciones que agregan Mesa al archivo y a la lista, FUNCION AL MENU
 
 nodoMesa * archivoToListaMesa (char archivoMesas[], nodoMesa * listaMesa); //Carga la LISTA mesa con los datos del archivo
 
@@ -34,10 +34,15 @@ void mostrarMesasLibres(nodoMesa * listaMesa);//Llama a mostrarMesa con todos lo
 
 nodoMesa * bajaMesaLista(nodoMesa * listaMesa);
 
-void bajaArchivoMesa(char archivoMesa[], char archivoMesaTemporal[], int pos);
+//void bajaArchivoMesa(char archivoMesa[], char archivoMesaTemporal[], int pos);
 
-void bajaMesa(nodoMesa * listaMesa, char archivoMesa[], char archivoMesaTemporal[]);
+void bajaMesa(nodoMesa * * listaMesa, char archivoMesa[]);
 
-int chequearDisponibilidadMesas(nodoMesa * listaMesa);
+int chequearDisponibilidadMesas(nodoMesa * listaMesa);//Retorna cantidad de mesas libres, 0 si estan todas ocupadas
+
+///testeo
+void bajaArchivoMesa(char archivoMesa[],nodoMesa * listaMesasActualizada);
+
+void mostrarArchivoYFilaMesa (char nombreArchivo[],nodoMesa * lista);
 
 #endif /* Mesas_h */

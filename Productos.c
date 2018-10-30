@@ -29,7 +29,7 @@ nodoProd * agregarProductoLista (nodoProd * lista,nodoProd * nuevo){ ///EN EJECU
     return lista;
 }
 
-int chequearProducto(char archivoProd[], char nombre[30]){
+int chequearProducto(char archivoProd[], char nombre[30]){ ///Retorna 0 si no encuentra. 1 en caso verdadero
     int flag=0;
     FILE * archivo= fopen(archivoProd, "rb");
     if(archivo){
@@ -53,6 +53,11 @@ Producto altaProductoArchivo(char archivoProducto[]){ ///AGREGA UN PRODUCTO AL A
             printf("Ingrese nombre del producto nuevo... \n");
             fflush(stdin);
             gets(nuevo.nombre);
+            if(chequearProducto(archivoProducto, nuevo.nombre))
+            {
+                printf("El nombre del producto ya existe, elija otro...\n");
+                system("pause");
+            }
         } while (chequearProducto(archivoProducto, nuevo.nombre));
         printf("Ingrese el valor... \n");
         fflush(stdin);
@@ -86,16 +91,27 @@ nodoProd * archivoToListaProducto (char archivoProducto[],nodoProd * listaProd){
     }
     else
     {
-        printf("No se encontro el archivo...");
+        printf("No se encontro el archivo... Creando %s\n",archivoProducto); ///Si no se encuentra el archivo, que lo cree
+        fopen(archivoProducto,"wb");
         listaProd=inicListaProd();
     }
     return listaProd;
 }
 
-void altaProducto(char archivoProd[], nodoProd * listaProd){
-    Producto nuevo;
-    nuevo=altaProductoArchivo(archivoProd);
-    listaProd=agregarProductoLista(listaProd,crearNodoProd(nuevo));
+void altaProducto(char archivoProd[], nodoProd * * listaProd){
+    if(fopen(archivoProd,"rb"))
+    {
+        Producto nuevo;
+        nuevo=altaProductoArchivo(archivoProd);
+        *listaProd=agregarProductoLista(*listaProd,crearNodoProd(nuevo));
+    }
+    else
+    {
+        printf("\nNo se encontro el archivo: %s ... Creando uno nuevo...\n");
+        fopen(archivoProd,"wb");
+        altaProducto(archivoProd,*listaProd);
+    }
+
 }
 
 void mostrarListProductos(nodoProd * listaProd){
@@ -113,6 +129,7 @@ nodoProd * bajaListaProd(nodoProd * listaProd, char nombre[30]){
             aux=listaProd;
             listaProd=listaProd->sig;
             free(aux);
+            printf("\nSe elimino el producto de manera correcta...\n");
         }else{
             nodoProd * cursor=listaProd->sig;
             nodoProd * ante=listaProd;
@@ -120,58 +137,83 @@ nodoProd * bajaListaProd(nodoProd * listaProd, char nombre[30]){
                 ante=cursor;
                 cursor=cursor->sig;
             }
+            if(cursor)
+            {
             ante->sig=cursor->sig;
             free(cursor);
+            printf("\nSe elimino el producto de manera correcta...\n");
+            }
+            else
+            {
+                printf("\nNo se encuentra el producto a eliminar...\n");
+            }
+
         }
     }
     return listaProd;
 }
 
-void bajaArchivoProducto(char archivoProducto[], char nombre[30]){//Elimina definitivo un producto del archivo.
-    Producto p;
-    char aProductoTemp[]={"aProdTemp.dat"};
-    FILE *archivo;
-    FILE *temporal;
-    archivo = fopen(archivoProducto, "rb");
-    temporal = fopen(aProductoTemp, "ab");
-    if (archivo == NULL || temporal == NULL) {
-        printf("No pudo abrir el archivo bbla bla bla\n");
-        if(archivo==NULL){
-            printf("PRODUCTO\n");
+void bajaArchivoProducto(char archivoProducto[], nodoProd * listaActualizada)
+{
+    FILE * archivo=fopen(archivoProducto,"wb");
+    if(listaActualizada)
+    {
+        Producto aux;
+        while(listaActualizada)
+        {
+            aux=listaActualizada->prod;
+            fwrite(&aux,sizeof(Producto),1,archivo);
+            listaActualizada=listaActualizada->sig;
         }
-        if(temporal==NULL){
-            printf("TEMPORAL\n");
-        }
-    } else {
-        // Se copia en el archivo temporal los registros válidos
-        fread(&p, sizeof(Producto), 1, archivo);
-        while (!feof(archivo)) {
-            if (strcmp(p.nombre, nombre)!=0) {
-                fwrite(&p, sizeof(Producto), 1, temporal);
-            }
-            fread(&p, sizeof(Producto), 1, archivo);
-        }
-        // Se cierran los archivos antes de borrar y renombrar
-        fclose(archivo);
-        fclose(temporal);
-        remove(archivoProducto);
-        rename(aProductoTemp, archivoProducto);
     }
+    fclose(archivo);
 }
 
-void bajaProducto(nodoProd * listaProd,char archivoProducto[]){
-    if (listaProd) {
+void bajaProducto(nodoProd * * listaProd,char archivoProducto[]){ ///DE LISTA A ARCHIVO
+    if (*listaProd) {
         char nombre[30];
         printf("\nIngrese el producto a borrar: ");
         fflush(stdin);
         gets(nombre);
         if (chequearProducto(archivoProducto, nombre)) {
-            listaProd=bajaListaProd(listaProd, nombre);
-            bajaArchivoProducto(archivoProducto, nombre);
+            *listaProd=bajaListaProd(*listaProd, nombre);
+            bajaArchivoProducto(aProductos,*listaProd);
         }else{
             printf("\nNo se encontro el producto buscado");
         }
     }else{
         printf("\nNo hay productos cargados");
     }
+}
+
+nodoProd * retornarNodoProductoDeLista (nodoProd * listaProducto,char nombre[]) ///Se supone que existe el producto, si no se rompe todo
+{
+    nodoProd * rta=inicListaProd();
+    if(listaProducto)
+    {
+        while(listaProducto && strcmp(listaProducto->prod.nombre,nombre)!=0)
+        {
+            listaProducto=listaProducto->sig;
+        }
+        rta=listaProducto;
+    }
+    return rta;
+}
+
+void mostrarArchivoYFilaProd (char nombreArchivo[],nodoProd * lista)
+{
+    FILE * archi=fopen(nombreArchivo,"rb");
+    Producto aux;
+    printf("\nArchivo:\n");
+    while(fread(&aux,sizeof(Producto),1,archi)>0)
+    {
+        printf("| Nombre: %s |",aux.nombre);
+    }
+    printf("\nLista:\n");
+    while(lista)
+    {
+        printf("| Nombre: %s |",lista->prod.nombre);
+        lista=lista->sig;
+    }
+    printf("\n");
 }

@@ -7,6 +7,8 @@
 #define Clientes_h
 
 #include "Funciones.h"
+#include "Mesas.h"
+#include "Comanda.h"
 
 Cliente nuevoCliente (void); // Pide nombre de cliente y retorna el dato Cliente
 

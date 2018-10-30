@@ -48,20 +48,19 @@ Mesa nuevaMesaArchivo (char archivoMesas[],int ultimaMesa){ ///AGREGA UNA MESA A
 }
 
 int buscarUltimaMesaArchivo (char archivoMesas[]){ ///RETORNA ULTIMO NUMERO DE MESA / 0 SI NO HAY ARCHIVO
-    int rta;
+    int rta=0;
     if(fopen(archivoMesas,"rb"))
     {
         Mesa aux;
         FILE * archi=fopen(archivoMesas,"rb");
         fseek(archi,sizeof(Mesa)*-1,SEEK_END);
-        fread(&aux,sizeof(Mesa),1,archi);
-        rta=aux.numero;
+        if(fread(&aux,sizeof(Mesa),1,archi)>0)
+            rta=aux.numero;
         fclose(archi);
     }
     else
     {
         printf("Archivo - %s - no encontrado...\n",archivoMesas);
-        rta=0;
     }
     return rta;
 }
@@ -85,9 +84,9 @@ nodoMesa * agregarFinalListaMesa(nodoMesa * listaMesa, nodoMesa * nuevo){
     return listaMesa;
 }
 
-void altaMesa(char archivoMesas[], nodoMesa * listaMesas){
+void altaMesa(char archivoMesas[], nodoMesa * * listaMesas){
     Mesa nueva=nuevaMesaArchivo(archivoMesas, buscarUltimaMesaArchivo(archivoMesas));
-    listaMesas=agregarFinalListaMesa(listaMesas, crearNodoMesa(nueva));
+    *listaMesas=agregarFinalListaMesa(*listaMesas, crearNodoMesa(nueva));
 }
 
 nodoMesa * archivoToListaMesa (char archivoMesas[], nodoMesa * listaMesa){ ///CARGA DESDE EL ARCHIVO DE MESA A LA LISTA, RETORNA VALIDOS
@@ -104,7 +103,8 @@ nodoMesa * archivoToListaMesa (char archivoMesas[], nodoMesa * listaMesa){ ///CA
     }
     else
     {
-        printf("No se encontro el archivo...");
+        printf("No se encontro el archivo...Creando %s\n",archivoMesas); ///Si no encuentra el archivo, lo crea...
+        fopen(archivoMesas,"wb");
     }
     return listaMesa;
 }
@@ -127,6 +127,9 @@ void mostrarMesasLibres (nodoMesa * lista) ///MUESTRA MESAS LIBRES, RETORNA CANT
     }
 }
 
+
+
+
 nodoMesa * bajaMesaLista(nodoMesa * listaMesa){
     if(listaMesa){
         if(!listaMesa->sig){
@@ -146,18 +149,23 @@ nodoMesa * bajaMesaLista(nodoMesa * listaMesa){
     return listaMesa;
 }
 
+/*
 void bajaArchivoMesa(char archivoMesa[], char archivoMesaTemporal[], int pos){//Elimina definitivo una mesa del archivo.
     //pasar buscarUltimaMesaArchivo como argumento en pos
     //Crear direccion de archivo temporal dentro de la funcion
     pos--;
+    printf("\n--%i\n",pos);
+    if(pos>0)
+    {
+    puts("pos > 0");
     Mesa m;
     FILE *archivo;
     FILE *temporal;
-    int i=0;
     archivo = fopen(archivoMesa, "rb");
     temporal = fopen(archivoMesaTemporal, "ab");
+    int i=0;
     if (archivo == NULL || temporal == NULL) {
-        printf("No pudo abrir el archivo bbla bla bla\n");
+        printf("Archivo - %s - no encontrado...\n",archivoMesa);
         if(archivo==NULL){
             printf("MESA\n");
         }
@@ -180,17 +188,56 @@ void bajaArchivoMesa(char archivoMesa[], char archivoMesaTemporal[], int pos){//
         remove(archivoMesa);
         rename(archivoMesaTemporal, archivoMesa);
     }
+    }
+    else
+    {
+        printf("No hay mesas para borrar...\n");
+    }
+
+}
+*/
+
+void bajaArchivoMesa(char archivoMesa[],nodoMesa * listaMesasActualizada)
+{
+    if(listaMesasActualizada)
+    {
+        FILE * archivo=fopen(archivoMesa,"wb");
+        Mesa aux;
+        while(listaMesasActualizada)
+        {
+            aux=listaMesasActualizada->mesa;
+            if(aux.ocupada==1)
+                aux.ocupada=0;
+            fwrite(&aux,sizeof(Mesa),1,archivo);
+            listaMesasActualizada=listaMesasActualizada->sig;
+        }
+        fclose(archivo);
+    }
+    else
+    {
+        FILE * archivo=fopen(archivoMesa,"wb");
+        fclose(archivo);
+    }
 }
 
-void bajaMesa(nodoMesa * listaMesa, char archivoMesa[], char archivoMesaTemporal[]){
-    nodoMesa * ultimo=buscarUltimoNodoMesa(listaMesa);
-    if(ultimo->mesa.ocupada==0){
-        listaMesa=bajaMesaLista(listaMesa);
-        bajaArchivoMesa(archivoMesa, archivoMesaTemporal, buscarUltimaMesaArchivo(archivoMesa));
-        printf("Se elimino la mesa correctamente\n");
-    }else{
-        printf("La mesa numero %i esta ocupada\n",ultimo->mesa.numero);
+void bajaMesa(nodoMesa * * listaMesa, char archivoMesa[]){
+    if(*listaMesa)
+    {
+        nodoMesa * ultimo=buscarUltimoNodoMesa(*listaMesa);
+        if(ultimo->mesa.ocupada==0){
+                *listaMesa=bajaMesaLista(*listaMesa);
+                bajaArchivoMesa(archivoMesa,*listaMesa);
+            printf("Se elimino la mesa correctamente\n");
+        }else{
+            printf("La mesa numero %i esta ocupada\n",ultimo->mesa.numero);
+
+        }
     }
+    else
+    {
+        printf("No hay mesas para dar de baja...\n");
+    }
+system("pause");
 }
 
 int chequearDisponibilidadMesas(nodoMesa * listaMesa){
@@ -202,4 +249,22 @@ int chequearDisponibilidadMesas(nodoMesa * listaMesa){
         listaMesa=listaMesa->sig;
     }
     return rta;
+}
+
+void mostrarArchivoYFilaMesa (char nombreArchivo[],nodoMesa * lista)
+{
+    FILE * archi=fopen(nombreArchivo,"rb");
+    Mesa aux;
+    printf("\nArchivo:\n");
+    while(fread(&aux,sizeof(Mesa),1,archi)>0)
+    {
+        printf("| [%.2i] |",aux.numero);
+    }
+    printf("\nLista:\n");
+    while(lista)
+    {
+        printf("| [%.2i] |",lista->mesa.numero);
+        lista=lista->sig;
+    }
+    printf("\n");
 }

@@ -13,10 +13,8 @@
 #include "Comanda.h"
 
 void menunodoClienteoProductos(void);
-void menuProductos(void);
-void menuMesasIndividual(void);
-void menunodoClienteoMesas(void);
-void menuMesas(void);
+void menuProductos(nodoProd * * listaProductos);
+void menuMesas(nodoMesa * * listaMesas);
 void menunodoClienteoClientes(void);
 void menuClientes(void);
 void menuPrincipal(void);

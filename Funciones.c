@@ -6,9 +6,13 @@
 #include "Funciones.h"
 
 //archivos
-char aClientes[]={"Clientes.dat"};
-char aMesas[]={"Mesas.dat"};
-char aProductos[]={"Productos.dat"};
+//char aClientes[]={"Clientes.dat"};
+//char aMesas[]={"Mesas.dat"};
+//char aProductos[]={"Productos.dat"};
+
+
+
+
 
 void tituloPrincipal(void){
     printf("\n     ======================================================================\n");

@@ -6,6 +6,9 @@
 #include <string.h>
 #include <ctype.h>
 
+#define aMesas "mesas.dat"
+#define aProductos "productos.dat"
+
 //Estructuras
 typedef struct{ // Lista de productos
     char nombre[30];
