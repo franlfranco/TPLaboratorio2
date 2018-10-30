@@ -28,7 +28,7 @@ void mostrarFilaEspera (Fila espera);//Muestra la FILA de clientes en espera
 
 Cliente extraerClienteEspera (Fila * espera);//Quita un cliente de la FILA de clientes en espera y retorna struct Cliente
 
-void testFila (void);//Test Falopa
+void testFila (void);//Test Falopa que va a volar en cualquier momento
 
 void altaCliente(arbolCuenta * arbolCuentas, nodoMesa * * listaMesa, Fila * espera);//Atiende cliente o lo manda a lista de espera, funcion al menu
 

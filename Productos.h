@@ -12,7 +12,7 @@ nodoProd * inicListaProd (void);
 
 nodoProd * crearNodoProd (Producto nuevo);
 
-nodoProd * agregarProductoLista (nodoProd * lista,nodoProd * nuevo); ///EN EJECUCION
+nodoProd * agregarProductoLista (nodoProd * lista,nodoProd * nuevo); ///Agrega un producto a la LISTA simple de productos
 
 int chequearProducto(char archivoProducto[],char nombre[30]);///Retorna 1 si el nombre ya esta en el archivo
 
@@ -31,8 +31,8 @@ void bajaArchivoProducto(char archivoProducto[], nodoProd * listaActualizada);
 
 void bajaProducto(nodoProd * * listaProd,char archivoProducto[]);///Funcion que llama a bajarLista y bajarArchivo, va al menu
 
-nodoProd * retornarNodoProductoDeLista (nodoProd * listaProducto,char nombre[]);
+nodoProd * retornarNodoProductoDeLista (nodoProd * listaProducto, char nombre[]);//Busca un nodo con el nombre pasado por parametro y lo retorna
 
-void mostrarArchivoYFilaProd (char nombreArchivo[],nodoProd * lista);
+void mostrarArchivoYFilaProd (char nombreArchivo[],nodoProd * lista);// Muestra datos en el archivo productos.dat y en la lista simple de productos para verificar que los datos coincidan
 
 #endif /* Productos_h */

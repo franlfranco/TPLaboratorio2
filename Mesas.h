@@ -32,17 +32,14 @@ void mostrarMesa(nodoMesa * aux);//Muestra los datos de un nodoMesa
 
 void mostrarMesasLibres(nodoMesa * listaMesa);//Llama a mostrarMesa con todos los nodos de la lista de mesa
 
-nodoMesa * bajaMesaLista(nodoMesa * listaMesa);
+nodoMesa * bajaMesaLista(nodoMesa * listaMesa);//Elimina un nodo de la listaMesa
 
-//void bajaArchivoMesa(char archivoMesa[], char archivoMesaTemporal[], int pos);
+void bajaMesa(nodoMesa * * listaMesa, char archivoMesa[]);// Llama a las funciones que eliminan mesas, va al menu
 
-void bajaMesa(nodoMesa * * listaMesa, char archivoMesa[]);
+void bajaArchivoMesa(char archivoMesa[],nodoMesa * listaMesasActualizada);// Elimina un nodo del archivo de mesas
 
 int chequearDisponibilidadMesas(nodoMesa * listaMesa);//Retorna cantidad de mesas libres, 0 si estan todas ocupadas
 
-///testeo
-void bajaArchivoMesa(char archivoMesa[],nodoMesa * listaMesasActualizada);
-
-void mostrarArchivoYFilaMesa (char nombreArchivo[],nodoMesa * lista);
+void mostrarArchivoYFilaMesa (char nombreArchivo[],nodoMesa * lista);// Muestra mesas en la lista de mesas y en el archivo, para poder comprobar el correcto funcionamiento
 
 #endif /* Mesas_h */
