@@ -169,3 +169,63 @@ void atencionClienteEspera(nodoMesa ** listaMesa, Fila * espera, arbolCuenta ** 
         printf("No hay mesas libres.\n");
     }
 }
+
+int eliminarNodoClienteDeFila (nodoCliente * * espera,char nombre[]) ///MODIFICA LA LISTA DE ESPERA, RETORNA 1 SI ELIMINO
+{
+    int flag=0;
+    if(*espera!=NULL)
+    {
+        nodoCliente * aborrar=inicNodoCliente();
+        if(strcmp((*espera)->cliente.nombre,nombre)==0)
+        {
+            aborrar=*espera;
+            *espera=(*espera)->sig;
+            if(*espera)
+            {
+                (*espera)->ante=inicNodoCliente();
+            }
+            free(aborrar);
+            flag=1;
+        }
+        else
+        {
+            nodoCliente * cursor=(*espera)->sig;
+            while(cursor && strcmp(cursor->cliente.nombre,nombre)!=0)
+            {
+                cursor=cursor->sig;
+            }
+            if(cursor)
+            {
+                nodoCliente * ante=cursor->ante;
+                aborrar=cursor;
+                cursor=cursor->sig;
+                ante->sig=cursor;
+                if(cursor)
+                    cursor->ante=ante;
+                free(aborrar);
+                flag=1;
+            }
+        }
+    }
+return flag;
+}
+
+void bajaClienteEspera(Fila * espera)
+{
+    if(espera->cabecera)
+    {
+        char nombre[30];
+        printf("Ingrese el nombre de la persona que desea eliminar de la fila: ");
+        fflush(stdin);
+        gets(nombre);
+        nodoCliente * ultimo=espera->ultimo;
+        if(strcmp(ultimo->cliente.nombre,nombre)==0)
+            ultimo=ultimo->ante;
+        if(eliminarNodoClienteDeFila(&espera->cabecera,nombre))
+            printf("Se elimino a %s con exito.\n",nombre);
+        else
+            printf("No se encuentra el nombre %s en la fila.\n",nombre);
+    }
+    else
+        printf("No hay nadie en la fila de espera.\n");
+}
