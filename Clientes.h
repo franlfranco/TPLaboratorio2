@@ -34,4 +34,8 @@ void altaCliente(arbolCuenta ** arbolCuentas, nodoMesa * * listaMesa, Fila * esp
 
 void atencionClienteEspera(nodoMesa ** listaMesa, Fila * espera, arbolCuenta ** arbolCuentas);//Chequea disponibilidad de mesa y fila y atiende al primer cliente en espera.
 
+int eliminarNodoClienteDeFila (nodoCliente * * espera,char nombre[]);
+
+void bajaClienteEspera(Fila * espera);
+
 #endif /* Clientes_h */
