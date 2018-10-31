@@ -169,6 +169,7 @@ arbolCuenta * sumarProductoCuenta (arbolCuenta * mesasOcupadas,nodoProd * cartaP
     actual=buscarComandaPorNroMesa(mesasOcupadas,nroMesa);
     if(actual)
         {
+            system("cls");
             mostrarComanda(actual);
             printf("\n--------------------Carta--------------------\n");
             mostrarListProductos(cartaProductos);
@@ -176,9 +177,8 @@ arbolCuenta * sumarProductoCuenta (arbolCuenta * mesasOcupadas,nodoProd * cartaP
             printf("Ingrese nombre del producto que desea agregar: ");
             fflush(stdin);
             scanf("%s",nombreProducto);
-            if(chequearProducto(aMesas,nombreProducto))
+            if(chequearProducto(aProductos,nombreProducto))
             {
-                //nuevo=extraerProductoDeLista(cartaProductos,nombreProducto);
                 nuevo=retornarNodoProductoDeLista(cartaProductos,nombreProducto);
                 actual->listaProd=agregarProductoLista(actual->listaProd,nuevo);
                 printf("\nProducto agregado con exito!...\n");
