@@ -50,12 +50,12 @@ Producto altaProductoArchivo(char archivoProducto[]){ ///AGREGA UN PRODUCTO AL A
     do
     {
         do {
-            printf("Ingrese nombre del producto nuevo... \n");
+            printf("Ingrese nombre del producto nuevo: \n");
             fflush(stdin);
             scanf("%s",nuevo.nombre);
             if(chequearProducto(archivoProducto, nuevo.nombre))
             {
-                printf("El nombre del producto ya existe, elija otro...\n");
+                printf("El nombre del producto ya existe, elija otro\n");
                 system("pause");
             }
         } while (chequearProducto(archivoProducto, nuevo.nombre));
@@ -91,7 +91,7 @@ nodoProd * archivoToListaProducto (char archivoProducto[],nodoProd * listaProd){
     }
     else
     {
-        printf("No se encontro el archivo... Creando %s\n",archivoProducto); ///Si no se encuentra el archivo, que lo cree
+        printf("No se encontro el archivo. Creando %s\n",archivoProducto); ///Si no se encuentra el archivo, que lo cree
         fopen(archivoProducto,"wb");
         listaProd=inicListaProd();
     }
@@ -107,7 +107,7 @@ void altaProducto(char archivoProd[], nodoProd * * listaProd){
     }
     else
     {
-        printf("\nNo se encontro el archivo: %s ... Creando uno nuevo...\n");
+        printf("\nNo se encontro el archivo. Creando uno nuevo\n");
         fopen(archivoProd,"wb");
         altaProducto(archivoProd,*listaProd);
     }
@@ -129,7 +129,7 @@ nodoProd * bajaListaProd(nodoProd * listaProd, char nombre[30]){
             aux=listaProd;
             listaProd=listaProd->sig;
             free(aux);
-            printf("\nSe elimino el producto de manera correcta...\n");
+            printf("\nSe elimino el producto de manera correcta\n");
         }else{
             nodoProd * cursor=listaProd->sig;
             nodoProd * ante=listaProd;
@@ -141,11 +141,11 @@ nodoProd * bajaListaProd(nodoProd * listaProd, char nombre[30]){
             {
             ante->sig=cursor->sig;
             free(cursor);
-            printf("\nSe elimino el producto de manera correcta...\n");
+            printf("\nSe elimino el producto de manera correcta\n");
             }
             else
             {
-                printf("\nNo se encuentra el producto a eliminar...\n");
+                printf("\nNo se encuentra el producto a eliminar\n");
             }
 
         }

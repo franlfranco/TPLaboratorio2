@@ -74,16 +74,17 @@ arbolCuenta * crearHojaComanda(Mesa mesa,Cliente cliente){ ///CREA UNA COMANDA E
 
 int ocuparMesa (nodoMesa ** lista,Mesa * pedida,int nro){ ///PIDE LISTA, STRUCT MESA VACIA Y NRO. RETORNA 0 SI NO ENCONTRO LIBRE EL NRO Y 1 SI ESTA OK
     int flag=0;
-    while(*lista){
+    if(*lista){
         nodoMesa * cursor=*lista;
-        if(cursor->mesa.numero==nro && cursor->mesa.ocupada==0){
-            cursor->mesa.ocupada=1;
-            *pedida=cursor->mesa;
-            flag=1;
-        }else{
-            cursor=cursor->sig;
+        while (cursor) {
+            if(cursor->mesa.numero==nro && cursor->mesa.ocupada==0){
+                cursor->mesa.ocupada=1;
+                *pedida=cursor->mesa;
+                flag=1;
+            }else{
+                cursor=cursor->sig;
+            }
         }
-
     }
     return flag;
 }
@@ -100,6 +101,7 @@ arbolCuenta * ingresarClienteANodoArbol (nodoMesa * * listaMesa, Cliente nuevoCl
         printf("Ingrese el numero de Mesa para %s\n- ",nuevoCliente.nombre);
         fflush(stdin);
         scanf("%i",&elegir);
+        
         if(!ocuparMesa(listaMesa,&mesa,elegir))//retorna 1 si la mesa esta libre
         {
             printf("\nEl numero de mesa ingresada es incorrecto o esta ocupada. Ingrese nuevamente\n");

@@ -146,13 +146,26 @@ void testFila (void){
     }while(opc!=0);
 }
 
-void altaCliente(arbolCuenta * arbolCuentas, nodoMesa * * listaMesa, Fila * espera){
+void altaCliente(arbolCuenta ** arbolCuentas, nodoMesa * * listaMesa, Fila * espera){
     Cliente nuevo=nuevoCliente();
     if(chequearDisponibilidadMesas(*listaMesa)){
         printf("Cliente al arbol\n");
-        arbolCuentas=agregarHojaArbolCuentas(arbolCuentas, ingresarClienteANodoArbol(listaMesa, nuevo));
+        *arbolCuentas=agregarHojaArbolCuentas(*arbolCuentas, ingresarClienteANodoArbol(listaMesa, nuevo));
     }else{
         agregarClienteAFila(espera, nuevo);
         printf("Cliente a la fila\n");
+    }
+}
+
+void atencionClienteEspera(nodoMesa ** listaMesa, Fila * espera, arbolCuenta ** arbolCuentas){
+    if(chequearDisponibilidadMesas(*listaMesa)){
+        if(espera->cabecera){
+            Cliente atender=extraerClienteEspera(espera);
+            *arbolCuentas=agregarHojaArbolCuentas(*arbolCuentas, ingresarClienteANodoArbol(listaMesa, atender));
+        }else{
+            printf("La fila esta vacia.\n");
+        }
+    }else{
+        printf("No hay mesas libres.\n");
     }
 }

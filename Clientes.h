@@ -30,6 +30,8 @@ Cliente extraerClienteEspera (Fila * espera);//Quita un cliente de la FILA de cl
 
 void testFila (void);//Test Falopa que va a volar en cualquier momento
 
-void altaCliente(arbolCuenta * arbolCuentas, nodoMesa * * listaMesa, Fila * espera);//Atiende cliente o lo manda a lista de espera, funcion al menu
+void altaCliente(arbolCuenta ** arbolCuentas, nodoMesa * * listaMesa, Fila * espera);//Atiende cliente o lo manda a lista de espera, funcion al menu
+
+void atencionClienteEspera(nodoMesa ** listaMesa, Fila * espera, arbolCuenta ** arbolCuentas);//Chequea disponibilidad de mesa y fila y atiende al primer cliente en espera.
 
 #endif /* Clientes_h */

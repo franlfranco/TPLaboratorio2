@@ -109,9 +109,13 @@ nodoMesa * archivoToListaMesa (char archivoMesas[], nodoMesa * listaMesa){ ///CA
     return listaMesa;
 }
 
-void mostrarMesa(nodoMesa * aux){
-    printf("\nNumero mesa: %i",aux->mesa.numero);
-    printf("\nOcupada: %i\n",aux->mesa.ocupada);
+void mostrarMesa(int nro, int ocupada, char nombreCliente[30]){
+    printf("\nNumero mesa: %i",nro);
+    if (ocupada) {
+        printf("\nCliente: %s\n",nombreCliente);
+    }else{
+        printf("\nLIBRE\n");
+    }
 }
 
 void mostrarMesasLibres (nodoMesa * lista) ///MUESTRA MESAS LIBRES, RETORNA CANTIDAD / 0 SI NO HAY
@@ -216,4 +220,35 @@ void mostrarArchivoYFilaMesa (char nombreArchivo[],nodoMesa * lista)
         lista=lista->sig;
     }
     printf("\n");
+}
+
+int chequearExistenciaMesa(nodoMesa * listaMesa, int nro){
+    int flag=0;
+    while (listaMesa&&!flag) {
+        if(listaMesa->mesa.numero==nro){
+            flag=1;
+        }else{
+            listaMesa=listaMesa->sig;
+        }
+    }
+    return flag;
+}
+
+void mostrarMesaIndividualXNumero(nodoMesa * listaMesa, arbolCuenta * arbolCuentas){
+    int nro;
+    
+    printf("\nIngrese el numero de mesa a mostrar: ");
+    fflush(stdin);
+    scanf("%i",&nro);
+    if (chequearExistenciaMesa(listaMesa, nro)) {
+        arbolCuenta * aux=inicArbol();
+        aux=buscarComandaPorNroMesa(arbolCuentas, nro);
+        if(aux){
+            mostrarMesa(nro, 1, aux->cliente.nombre);
+        }else{
+            mostrarMesa(nro, 0, " ");
+        }
+    }else{
+        printf("La mesa no existe.\n");
+    }
 }

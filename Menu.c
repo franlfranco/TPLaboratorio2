@@ -5,7 +5,7 @@
 
 #include "Menu.h"
 
-void menuCuentas(void){
+void menuCuentas(arbolCuenta ** arbolCuentas){
     char repite = 1;
     int opcion = -1;
 
@@ -26,7 +26,7 @@ void menuCuentas(void){
         switch (opcion) {
 
             case 1:
-                //mostrarCuentas();
+                mostrarArbolComandaenOrden(*arbolCuentas);
                 break;
 
             case 2:
@@ -98,7 +98,7 @@ void menuProductos(nodoProd * * listaProductos){
     } while (repite);
 }
 
-void menuListadoIndividualMesas(void){
+void menuListadoIndividualMesas(nodoMesa * listaMesa, arbolCuenta * arbolCuentas){
     char repite = 1;
     int opcion = -1;
     
@@ -116,7 +116,7 @@ void menuListadoIndividualMesas(void){
         switch (opcion) {
                 
             case 1:
-                //mostrarMesaIndividualXNumero
+                mostrarMesaIndividualXNumero(listaMesa, arbolCuentas);
                 break;
                 
             case 2:
@@ -131,7 +131,7 @@ void menuListadoIndividualMesas(void){
     } while (repite);
 }
 
-void menuListadoMesas(void){
+void menuListadoMesas(nodoMesa * listaMesa, arbolCuenta * arbolCuentas){
     char repite = 1;
     int opcion = -1;
     
@@ -152,7 +152,7 @@ void menuListadoMesas(void){
         switch (opcion) {
                 
             case 1:
-                menuListadoIndividualMesas();
+                menuListadoIndividualMesas(listaMesa,arbolCuentas);
                 break;
                 
             case 2:
@@ -179,12 +179,12 @@ void menuListadoMesas(void){
     } while (repite);
 }
 
-void menuMesas(nodoMesa * * listaMesas){
+void menuMesas(nodoMesa * * listaMesas, arbolCuenta * arbolCuentas){
     char repite = 1;
     int opcion = -1;
 
     do {
-        system("cls");//NO FUNCIONA EN MAC, SOLO EN WINDOWS
+        system("cls");
         mostrarArchivoYFilaMesa(aMesas,*listaMesas);
         tituloPrincipal();
         printf("\n\t\t\t\tSUBMENU MESAS\n");
@@ -207,7 +207,7 @@ void menuMesas(nodoMesa * * listaMesas){
                 break;
 
             case 3:
-                menuListadoMesas();
+                menuListadoMesas(*listaMesas,arbolCuentas);
                 break;
 
             case 0:
@@ -218,7 +218,7 @@ void menuMesas(nodoMesa * * listaMesas){
     } while (repite);
 }
 
-void menuListadoClientes(void){
+void menuListadoClientes(Fila * espera){
     char repite = 1;
     int opcion = -1;
 
@@ -226,7 +226,7 @@ void menuListadoClientes(void){
         system("cls");//NO FUNCIONA EN MAC, SOLO EN WINDOWS
         tituloPrincipal();
 
-        printf("\n\t\t\t\tSUBMENU nodoClienteO CLIENTES\n");
+        printf("\n\t\t\t\tSUBMENU LISTADO CLIENTES\n");
         printf("\t\t[1]. Atendidos\n");
         printf("\t\t[2]. En espera\n");
         printf("\t\t[0]. Volver\n");
@@ -238,10 +238,11 @@ void menuListadoClientes(void){
 
             case 1:
                 //mostrarClientesAtendidos
+                //muestra resumen de clientes atendidos
                 break;
 
             case 2:
-                //mostrarClientesEspera
+                mostrarFilaEspera(*espera);
                 break;
 
             case 0:
@@ -273,19 +274,20 @@ void menuClientes(nodoMesa ** listaMesa, arbolCuenta ** arbolCuentas, Fila * esp
         switch (opcion) {
 
             case 1:
-                altaCliente(*arbolCuentas, listaMesa, espera);
+                altaCliente(arbolCuentas, listaMesa, espera);
                 break;
 
             case 2:
-                //atencionCliente
+                atencionClienteEspera(listaMesa, espera, arbolCuentas);
                 break;
 
             case 3:
                 //bajaCliente
+                //Borrar nodo de lista doble, chequear que no sea cabecera o ultimo en la fila
                 break;
 
             case 4:
-                menuListadoClientes();
+                menuListadoClientes(espera);
                 break;
 
             case 0:
@@ -325,7 +327,7 @@ void menuPrincipal(void){ ///MAIN
                 menuClientes(&listaMesas, &arbolCuentas, &espera);
                 break;
             case 2:
-                menuMesas(&listaMesas);
+                menuMesas(&listaMesas,arbolCuentas);
                 break;
 
             case 3:
@@ -333,7 +335,7 @@ void menuPrincipal(void){ ///MAIN
                 break;
 
             case 4:
-                menuCuentas();
+                menuCuentas(&arbolCuentas);
                 break;
                 
             case 0:

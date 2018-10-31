@@ -12,17 +12,17 @@
 #include "Productos.h"
 #include "Comanda.h"
 
-void menuCuentas(void);
+void menuCuentas(arbolCuenta ** arbolCuentas);
 
 void menuProductos(nodoProd * * listaProductos);
 
-void menuListadoIndividualMesas(void);
+void menuListadoIndividualMesas(nodoMesa * listaMesa, arbolCuenta * arbolCuentas);
 
-void menuListadoMesas(void);
+void menuListadoMesas(nodoMesa * listaMesa, arbolCuenta * arbolCuentas);
 
-void menuMesas(nodoMesa * * listaMesas);
+void menuMesas(nodoMesa * * listaMesas, arbolCuenta * arbolCuentas);
 
-void menuListadoClientes(void);
+void menuListadoClientes(Fila * espera);
 
 void menuClientes(nodoMesa ** listaMesa, arbolCuenta ** arbolCuentas, Fila * espera);
 

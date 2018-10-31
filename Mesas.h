@@ -7,6 +7,7 @@
 #define Mesas_h
 
 #include "Funciones.h"
+#include "Comanda.h"
 
 nodoMesa * inicListaMesa(void);
 
@@ -28,7 +29,7 @@ void altaMesa(char archivoMesas[], nodoMesa * * listaMesas);//Llama a las funcio
 
 nodoMesa * archivoToListaMesa (char archivoMesas[], nodoMesa * listaMesa); //Carga la LISTA mesa con los datos del archivo
 
-void mostrarMesa(nodoMesa * aux);//Muestra los datos de un nodoMesa
+void mostrarMesa(int nro, int ocupada, char nombreCliente[30]);//Funcion generica que muestra mesa
 
 void mostrarMesasLibres(nodoMesa * listaMesa);//Llama a mostrarMesa con todos los nodos de la lista de mesa
 
@@ -41,5 +42,9 @@ void bajaArchivoMesa(char archivoMesa[],nodoMesa * listaMesasActualizada);// Eli
 int chequearDisponibilidadMesas(nodoMesa * listaMesa);//Retorna cantidad de mesas libres, 0 si estan todas ocupadas
 
 void mostrarArchivoYFilaMesa (char nombreArchivo[],nodoMesa * lista);// Muestra mesas en la lista de mesas y en el archivo, para poder comprobar el correcto funcionamiento
+
+int chequearExistenciaMesa(nodoMesa * listaMesa, int nro);//Funcion que chequea que la mesa exista. retorna 1 o 0
+
+void mostrarMesaIndividualXNumero(nodoMesa * listaMesa, arbolCuenta * arbolCuentas);//Muestra una sola mesa, busca por numero
 
 #endif /* Mesas_h */
