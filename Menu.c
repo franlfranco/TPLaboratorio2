@@ -283,6 +283,7 @@ void menuClientes(nodoMesa ** listaMesa, arbolCuenta ** arbolCuentas, Fila * esp
 
             case 3:
                 //bajaCliente
+                bajaClienteEspera(espera);
                 //Borrar nodo de lista doble, chequear que no sea cabecera o ultimo en la fila
                 break;
 
