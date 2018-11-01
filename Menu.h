@@ -12,7 +12,7 @@
 #include "Productos.h"
 #include "Comanda.h"
 
-void menuCuentas(arbolCuenta ** arbolCuentas);
+void menuCuentas(arbolCuenta ** arbolCuentas,nodoProd * listaProductos);
 
 void menuProductos(nodoProd * * listaProductos);
 
