@@ -186,7 +186,7 @@ void bajaProducto(nodoProd * * listaProd,char archivoProducto[]){ ///DE LISTA A 
     }
 }
 
-nodoProd * retornarNodoProductoDeLista (nodoProd * listaProducto,char nombre[]) ///xxx ///Se supone que existe el producto, si no se rompe todo
+nodoProd * retornarNodoProductoDeLista (nodoProd * listaProducto,char nombre[]) ///Se supone que existe el producto, si no se rompe todo
 {
     nodoProd * rta=inicListaProd();
     if(listaProducto)
