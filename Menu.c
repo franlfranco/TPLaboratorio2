@@ -5,7 +5,7 @@
 
 #include "Menu.h"
 
-void menuCuentas(arbolCuenta ** arbolCuentas){
+void menuCuentas(arbolCuenta ** arbolCuentas,nodoProd * listaProductos){
     char repite = 1;
     int opcion = -1;
 
@@ -30,6 +30,7 @@ void menuCuentas(arbolCuenta ** arbolCuentas){
                 break;
 
             case 2:
+                *arbolCuentas=sumarProductoCuenta(*arbolCuentas,listaProductos);
                 //agregarProducto();
                 break;
 
@@ -336,7 +337,7 @@ void menuPrincipal(void){ ///MAIN
                 break;
 
             case 4:
-                menuCuentas(&arbolCuentas);
+                menuCuentas(&arbolCuentas,listaProductos);
                 break;
                 
             case 0:
