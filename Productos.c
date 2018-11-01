@@ -195,7 +195,10 @@ nodoProd * retornarNodoProductoDeLista (nodoProd * listaProducto,char nombre[]) 
         {
             listaProducto=listaProducto->sig;
         }
-        rta=listaProducto;
+        if(listaProducto)
+        {
+            rta=crearNodoProd(listaProducto->prod);
+        }
     }
     return rta;
 }
