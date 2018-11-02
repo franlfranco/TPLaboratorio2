@@ -32,4 +32,6 @@ arbolCuenta * buscarComandaPorCliente (arbolCuenta * actual,char nombre[]);
 
 arbolCuenta * sumarProductoCuenta (arbolCuenta * mesasOcupadas,nodoProd * cartaProductos);
 
+arbolCuenta * restarProductoCuenta (arbolCuenta * mesasOcupadas);
+
 #endif /* Comanda_h */
