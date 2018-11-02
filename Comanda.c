@@ -216,10 +216,13 @@ arbolCuenta * restarProductoCuenta (arbolCuenta * mesasOcupadas) ///Resta un pro
             printf("Ingrese nombre del producto que desea eliminar de la cuenta: ");
             fflush(stdin);
             scanf("%s",nombreProducto);
-            if(chequearProducto(aProductos,nombreProducto))
+            //if(chequearProducto(aProductos,nombreProducto))
                 actual->listaProd=bajaListaProd(actual->listaProd,nombreProducto);
-            else
-                printf("\nEl nombre de producto ingresado es incorrecto\n");
+            //else
+                //printf("\nEl nombre de producto ingresado es incorrecto\n");
+            //Comentando estas lineas, no se bloquea el restar un producto que fue quitado del archivo durante la ejecucion,
+            //pero no hay forma de avisar al usuario si se borro de la cuenta o no... Habria que trabajar la listaprod por * * para
+            //retornar un flag (Pero habria que retocar todo el archivo)
         }
         else
         {
