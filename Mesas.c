@@ -303,3 +303,37 @@ void mostrarMesasOcupadas (nodoMesa * lista) ///MUESTRA MESAS OCUPADAS
         lista=lista->sig;
     }
 }
+
+void mostrarEstadisticasMesas(nodoMesa * listaMesas, arbolCuenta * arbolCuentas){
+    if(listaMesas){
+        nodoMesa * ultima=buscarUltimoNodoMesa(listaMesas);
+        int n=ultima->mesa.numero;
+        float suma=0;
+        printf("\nMontos por mesas\n");
+        printf("Numero | Total | Frecuencia relativa\n");
+        printf("-------------------------------\n");
+        while (listaMesas) {
+            if (listaMesas->mesa.ocupada) {
+                arbolCuenta * cuenta=buscarComandaPorNroMesa(arbolCuentas, listaMesas->mesa.numero);
+                int numero=cuenta->mesa.numero;
+                float total=sumarPreciosProd(cuenta->listaProd);
+                float fr=total/(float)n;
+                printf("\t  %i|\t $%.2f|\t%.2f %% \n",numero,total,fr);
+                printf("-------------------------------\n");
+                suma=+total;
+            }else{
+                printf("\t  %i|\t $0|\t0%%\n",listaMesas->mesa.numero);
+                printf("-------------------------------\n");
+            }
+            listaMesas=listaMesas->sig;
+        }
+        if(suma){
+            float promedio=suma/(float)n;
+            printf("\nEl promedio de venta por mesa es: %.2f\n",promedio);
+        }else{
+            printf("\nNo se registran ventas\n");
+        }
+    }else{
+        printf("No hay mesas cargadas.\n");
+    }
+}

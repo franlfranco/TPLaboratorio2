@@ -53,4 +53,6 @@ void mostrarTodasLasMesas (nodoMesa * listaMesas,arbolCuenta * arbolCuentas);
 
 void mostrarMesasOcupadas (nodoMesa * lista);
 
+void mostrarEstadisticasMesas(nodoMesa * listaMesas, arbolCuenta * arbolCuentas);
+
 #endif /* Mesas_h */

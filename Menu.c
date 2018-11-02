@@ -161,21 +161,18 @@ void menuListadoMesas(nodoMesa * listaMesa, arbolCuenta * arbolCuentas){
                 
             case 2:
                 mostrarTodasLasMesas (listaMesa,arbolCuentas);
-                //mostrarMesas();
                 break;
                 
             case 3:
                 mostrarMesasLibres(listaMesa);
-                //mostrarMesasLibres()
                 break;
             
             case 4:
                 mostrarMesasOcupadas(listaMesa);
-                //mostrarMesasOcupadas()
                 break;
                 
             case 5:
-                //TablaMesas()
+                mostrarEstadisticasMesas(listaMesa, arbolCuentas);
                 break;
                 
             case 0:
