@@ -220,3 +220,135 @@ void mostrarArchivoYFilaProd (char nombreArchivo[],nodoProd * lista)
     }
     printf("\n");
 }
+
+int cambiarNombreProductoLista (nodoProd * * lista,char nombreAnterior[],char nombreNuevo[])
+{
+    int flag=0;
+    if(*lista)
+    {
+        nodoProd * cursor=*lista;
+        while(cursor && strcmp(cursor->prod.nombre,nombreAnterior)!=0)
+        {
+            cursor=cursor->sig;
+        }
+        if(cursor)
+        {
+            strcpy(cursor->prod.nombre,nombreNuevo);
+            flag=1;
+        }
+    }
+return flag;
+}
+
+int cambiarCantVendidosProductoLista (nodoProd * * lista,char nombreProd[],int nuevaCantidad)
+{
+    int flag=0;
+    if(*lista)
+    {
+        nodoProd * cursor=*lista;
+        while(cursor && strcmp(cursor->prod.nombre,nombreProd)!=0)
+        {
+            cursor=cursor->sig;
+        }
+        if(cursor)
+        {
+            cursor->prod.cantVendidos=nuevaCantidad;
+            flag=1;
+        }
+    }
+return flag;
+}
+
+int cambiarPrecioProductoLista (nodoProd * * lista,char nombreProd[],float nuevoPrecio)
+{
+    int flag=0;
+    if(*lista)
+    {
+        nodoProd * cursor=*lista;
+        while(cursor && strcmp(cursor->prod.nombre,nombreProd)!=0)
+        {
+            cursor=cursor->sig;
+        }
+        if(cursor)
+        {
+            cursor->prod.precio=nuevoPrecio;
+            flag=1;
+        }
+    }
+return flag;
+}
+
+void cambiarProductoArchivo (nodoProd * listaProductos,char nombreArchivoProductos[])
+{
+    FILE * archi=fopen(nombreArchivoProductos,"wb");
+    if(listaProductos)
+    {
+        Producto aux;
+        while(listaProductos)
+        {
+            aux=listaProductos->prod;
+            fwrite(&aux,sizeof(Producto),1,archi);
+            listaProductos=listaProductos->sig;
+        }
+    }
+    fclose(archi);
+}
+
+void modificarProducto (char nombreArchivo[],nodoProd * * listaProductos)
+{
+    char nombreProducto[30];
+    char nombreProductoNuevo[30];
+    int opc;
+    int cantVendidos;
+    float precio;
+    printf("Ingrese el nombre del producto a cambiar: ");
+    scanf("%s",&nombreProducto);
+    if(chequearProducto(nombreArchivo,nombreProducto))
+    {
+        printf("\nSeleccione que campo desea cambiar:\n");
+        printf("1- Nombre del producto\n");
+        printf("2- Precio\n");
+        printf("3- Cantidad vendidos\n");
+        printf("0- Cancelar\n");
+        fflush(stdin);
+        scanf("%i",&opc);
+        switch(opc)
+               {
+               case 1:
+                   printf("Ingrese el nombre nuevo del producto: ");
+                   fflush(stdin);
+                   scanf("%s",&nombreProductoNuevo);
+                   if(chequearProducto(nombreArchivo,nombreProductoNuevo))
+                    printf("El nombre ya existe, se debe elegir otro.\n");
+                   else
+                    if(cambiarNombreProductoLista(listaProductos,nombreProducto,nombreProductoNuevo))
+                        cambiarProductoArchivo(*listaProductos,nombreArchivo);
+                    else
+                        printf("Error durante el cambio de nombre\n");
+                break;
+               case 2:
+                   printf("Ingrese el precio nuevo: ");
+                   fflush(stdin);
+                   scanf("%f",&precio);
+                   if(cambiarPrecioProductoLista(listaProductos,nombreProducto,precio))
+                    cambiarProductoArchivo(*listaProductos,nombreArchivo);
+                   else
+                    printf("Error durante el cambio de precio\n");
+                break;
+               case 3:
+                   printf("Ingrese la cantidad de ventas nuevo: ");
+                   fflush(stdin);
+                   scanf("%i",&cantVendidos);
+                   if(cambiarCantVendidosProductoLista(listaProductos,nombreProducto,cantVendidos))
+                    cambiarProductoArchivo(*listaProductos,nombreArchivo);
+                   else
+                    printf("Error durante el cambio de la cantidad de ventas\n");
+                break;
+               case 0:
+                   printf("Cancelando modificacion de producto");
+                break;
+               default:
+                printf("\nOpcion ingresada incorrecta\n");
+               }
+    }
+}
