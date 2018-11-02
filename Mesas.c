@@ -260,7 +260,7 @@ void mostrarMesaIndividualXNombre(nodoMesa * listaMesa, arbolCuenta * arbolCuent
     printf("\nIngrese el nombre del cliente a mostrar: ");
     fflush(stdin);
     //scanf("%i",&nro);
-    gets(nombre);
+    scanf("%s",nombre);
     arbolCuenta * aux=inicArbol();
     aux=buscarComandaPorCliente(arbolCuentas,nombre);
     if(aux)
