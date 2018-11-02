@@ -252,3 +252,54 @@ void mostrarMesaIndividualXNumero(nodoMesa * listaMesa, arbolCuenta * arbolCuent
         printf("La mesa no existe.\n");
     }
 }
+
+void mostrarMesaIndividualXNombre(nodoMesa * listaMesa, arbolCuenta * arbolCuentas){
+    //int nro;
+    char nombre[30];
+    //printf("\nIngrese el numero de mesa a mostrar: ");
+    printf("\nIngrese el nombre del cliente a mostrar: ");
+    fflush(stdin);
+    //scanf("%i",&nro);
+    gets(nombre);
+    arbolCuenta * aux=inicArbol();
+    aux=buscarComandaPorCliente(arbolCuentas,nombre);
+    if(aux)
+    {
+        mostrarMesa(aux->mesa.numero,1,aux->cliente.nombre);
+    }
+    else
+    {
+        printf("\nEl cliente ingresado no se encuentra ocupando una mesa.\n");
+    }
+}
+
+void mostrarTodasLasMesas (nodoMesa * listaMesas,arbolCuenta * arbolCuentas)
+{
+    arbolCuenta * aux;
+    while(listaMesas)
+    {
+        if(listaMesas->mesa.ocupada==0)
+        {
+            mostrarMesa(listaMesas->mesa.numero,0,"");
+        }
+        else
+        {
+            aux=buscarComandaPorNroMesa(arbolCuentas,listaMesas->mesa.numero);
+            mostrarMesa(aux->mesa.numero,1,aux->cliente.nombre);
+        }
+        listaMesas=listaMesas->sig;
+    }
+}
+
+void mostrarMesasOcupadas (nodoMesa * lista) ///MUESTRA MESAS OCUPADAS
+{
+    printf("\n--Mesas ocupadas--\n");
+    while(lista)
+    {
+        if(lista->mesa.ocupada==1)
+        {
+            printf("Mesa: %i\n",lista->mesa.numero);
+        }
+        lista=lista->sig;
+    }
+}
