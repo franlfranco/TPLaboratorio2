@@ -35,6 +35,7 @@ void menuCuentas(arbolCuenta ** arbolCuentas,nodoProd * listaProductos){
                 break;
 
             case 3:
+                *arbolCuentas=restarProductoCuenta(*arbolCuentas);
                 //quitarProducto();
                 break;
 
@@ -84,6 +85,7 @@ void menuProductos(nodoProd * * listaProductos){
                 break;
 
             case 4:
+                mostrarListProductos(*listaProductos);
                 //mostrarProductos();
                 break;
 
@@ -121,6 +123,7 @@ void menuListadoIndividualMesas(nodoMesa * listaMesa, arbolCuenta * arbolCuentas
                 break;
                 
             case 2:
+                mostrarMesaIndividualXNombre(listaMesa,arbolCuentas);
                 //mostrarMesaIndividualXNombre
                 break;
                 
@@ -157,14 +160,17 @@ void menuListadoMesas(nodoMesa * listaMesa, arbolCuenta * arbolCuentas){
                 break;
                 
             case 2:
+                mostrarTodasLasMesas (listaMesa,arbolCuentas);
                 //mostrarMesas();
                 break;
                 
             case 3:
+                mostrarMesasLibres(listaMesa);
                 //mostrarMesasLibres()
                 break;
             
             case 4:
+                mostrarMesasOcupadas(listaMesa);
                 //mostrarMesasOcupadas()
                 break;
                 
