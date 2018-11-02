@@ -38,4 +38,8 @@ int eliminarNodoClienteDeFila (nodoCliente * * espera,char nombre[]);
 
 void bajaClienteEspera(Fila * espera);
 
+void mostrarClientesYMesas (arbolCuenta * comanda);//Funcion auxiliar a mostrarClientesAtendidos
+
+void mostrarClientesAtendidos (arbolCuenta * arbol);//Muestra todos los clientes atendidos y la mesa que ocupan.
+
 #endif /* Clientes_h */

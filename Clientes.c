@@ -229,3 +229,20 @@ void bajaClienteEspera(Fila * espera)
     else
         printf("No hay nadie en la fila de espera.\n");
 }
+
+void mostrarClientesYMesas (arbolCuenta * comanda){ ///MUESTRA NRO MESA Y CLIENTE
+    if(comanda){
+        printf("\n=======================================================================\n");
+        printf("\nMesa nro: %i\n",comanda->mesa.numero);
+        printf("Cliente: %s\n",comanda->cliente.nombre);
+        printf("\n=======================================================================\n");
+    }
+}
+
+void mostrarClientesAtendidos (arbolCuenta * arbol){ ///Muestra el arbol de comandas sin los productos
+    if(arbol){
+        mostrarClientesAtendidos(arbol->izq);
+        mostrarClientesYMesas(arbol);
+        mostrarClientesAtendidos(arbol->der);
+    }
+}

@@ -219,7 +219,7 @@ void menuMesas(nodoMesa * * listaMesas, arbolCuenta * arbolCuentas){
     } while (repite);
 }
 
-void menuListadoClientes(Fila * espera){
+void menuListadoClientes(Fila * espera, arbolCuenta * arbolCuentas){
     char repite = 1;
     int opcion = -1;
 
@@ -238,8 +238,7 @@ void menuListadoClientes(Fila * espera){
         switch (opcion) {
 
             case 1:
-                //mostrarClientesAtendidos
-                //muestra resumen de clientes atendidos
+                mostrarClientesAtendidos(arbolCuentas);
                 break;
 
             case 2:
@@ -289,7 +288,7 @@ void menuClientes(nodoMesa ** listaMesa, arbolCuenta ** arbolCuentas, Fila * esp
                 break;
 
             case 4:
-                menuListadoClientes(espera);
+                menuListadoClientes(espera, *arbolCuentas);
                 break;
 
             case 0:

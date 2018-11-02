@@ -22,7 +22,7 @@ void menuListadoMesas(nodoMesa * listaMesa, arbolCuenta * arbolCuentas);
 
 void menuMesas(nodoMesa * * listaMesas, arbolCuenta * arbolCuentas);
 
-void menuListadoClientes(Fila * espera);
+void menuListadoClientes(Fila * espera, arbolCuenta * arbolCuentas);
 
 void menuClientes(nodoMesa ** listaMesa, arbolCuenta ** arbolCuentas, Fila * espera);
 
