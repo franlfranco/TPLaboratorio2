@@ -81,6 +81,7 @@ void menuProductos(nodoProd * * listaProductos){
                 bajaProducto(listaProductos,aProductos);
                 break;
             case 3:
+                modificarProducto(aProductos,listaProductos);
                 //modificacionProducto();
                 break;
 
