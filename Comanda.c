@@ -196,3 +196,40 @@ arbolCuenta * sumarProductoCuenta (arbolCuenta * mesasOcupadas,nodoProd * cartaP
     }
     return mesasOcupadas;
 }
+
+arbolCuenta * restarProductoCuenta (arbolCuenta * mesasOcupadas) ///Resta un producto de la lista del arbol
+{
+    int nroMesa;
+    nodoProd * nuevo;
+    arbolCuenta * actual=inicArbol();
+    char nombreProducto[30];
+    printf("\nIngrese nro de mesa a buscar a modificar: ");
+    fflush(stdin);
+    scanf("%i",&nroMesa);
+    actual=buscarComandaPorNroMesa(mesasOcupadas,nroMesa);
+    if(actual)
+    {
+        system("cls");
+        mostrarComanda(actual);
+        if(actual->listaProd)
+        {
+            printf("Ingrese nombre del producto que desea eliminar de la cuenta: ");
+            fflush(stdin);
+            scanf("%s",nombreProducto);
+            if(chequearProducto(aProductos,nombreProducto))
+                actual->listaProd=bajaListaProd(actual->listaProd,nombreProducto);
+            else
+                printf("\nEl nombre de producto ingresado es incorrecto\n");
+        }
+        else
+        {
+            printf("\nNo hay ningun producto cargado en la mesa actual\n");
+        }
+    }
+    else
+    {
+        printf("\nNo se encuentra el numero de mesa actualmente ocupado...\n");
+        system("pause");
+    }
+    return mesasOcupadas;
+}
