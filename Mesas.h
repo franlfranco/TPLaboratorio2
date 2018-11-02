@@ -47,4 +47,10 @@ int chequearExistenciaMesa(nodoMesa * listaMesa, int nro);//Funcion que chequea 
 
 void mostrarMesaIndividualXNumero(nodoMesa * listaMesa, arbolCuenta * arbolCuentas);//Muestra una sola mesa, busca por numero
 
+void mostrarMesaIndividualXNombre(nodoMesa * listaMesa, arbolCuenta * arbolCuentas); 
+
+void mostrarTodasLasMesas (nodoMesa * listaMesas,arbolCuenta * arbolCuentas);
+
+void mostrarMesasOcupadas (nodoMesa * lista);
+
 #endif /* Mesas_h */
