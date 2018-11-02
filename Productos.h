@@ -35,4 +35,16 @@ nodoProd * retornarNodoProductoDeLista (nodoProd * listaProducto, char nombre[])
 
 void mostrarArchivoYFilaProd (char nombreArchivo[],nodoProd * lista);// Muestra datos en el archivo productos.dat y en la lista simple de productos para verificar que los datos coincidan
 
+int cambiarNombreProductoLista (nodoProd * * lista,char nombreAnterior[],char nombreNuevo[]);
+
+int cambiarCantVendidosProductoLista (nodoProd * * lista,char nombreProd[],int nuevaCantidad);
+
+int cambiarPrecioProductoLista (nodoProd * * lista,char nombreProd[],float nuevoPrecio);
+
+void cambiarProductoArchivo (nodoProd * listaProductos,char nombreArchivoProductos[]);
+
+void modificarProducto (char nombreArchivo[],nodoProd * * listaProductos);
+
+
+
 #endif /* Productos_h */
