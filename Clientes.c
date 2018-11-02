@@ -217,7 +217,7 @@ void bajaClienteEspera(Fila * espera)
         char nombre[30];
         printf("Ingrese el nombre de la persona que desea eliminar de la fila: ");
         fflush(stdin);
-        gets(nombre);
+        scanf("%s",nombre);
         nodoCliente * ultimo=espera->ultimo;
         if(strcmp(ultimo->cliente.nombre,nombre)==0)
             ultimo=ultimo->ante;
