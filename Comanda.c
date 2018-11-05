@@ -6,6 +6,7 @@
 #include "Comanda.h"
 #include "Clientes.h"
 #include "Mesas.h"
+#include "Productos.h"
 
 arbolCuenta * inicArbol (void){
     return NULL;
@@ -25,10 +26,12 @@ arbolCuenta * agregarHojaArbolCuentas (arbolCuenta * arbol,arbolCuenta * nuevo){
 
 void mostrarCuenta (nodoProd * lista){ ///MUESTRA LA LISTA DE PRODUCTOS PEDIDOS POR EL CLIENTE
     float total=0;
+    Producto aux;
     printf("\n----------------Productos--------------------\n");
     while(lista){
-        printf("%30s   ||$ %.2f\n",lista->prod.nombre,lista->prod.precio);
-        total=total+lista->prod.precio;
+        aux=lista->prod;
+        printf("%s   ||$ %.2f\n",aux.nombre,aux.precio);
+        total=total+aux.precio;
         lista=lista->sig;
     }
     printf("\n\nTotal : $ %.2f\n",total);

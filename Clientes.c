@@ -244,7 +244,5 @@ void mostrarClientesAtendidos (arbolCuenta * arbol){ ///Muestra el arbol de coma
         mostrarClientesAtendidos(arbol->izq);
         mostrarClientesYMesas(arbol);
         mostrarClientesAtendidos(arbol->der);
-    }else{
-        printf("No hay clientes atendidos");
     }
 }
