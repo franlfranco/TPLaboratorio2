@@ -25,16 +25,13 @@ arbolCuenta * agregarHojaArbolCuentas (arbolCuenta * arbol,arbolCuenta * nuevo){
 }
 
 void mostrarCuenta (nodoProd * lista){ ///MUESTRA LA LISTA DE PRODUCTOS PEDIDOS POR EL CLIENTE
-    float total=0;
-    Producto aux;
+    nodoProd * cursor=lista;
     printf("\n----------------Productos--------------------\n");
-    while(lista){
-        aux=lista->prod;
-        printf("%s   ||$ %.2f\n",aux.nombre,aux.precio);
-        total=total+aux.precio;
-        lista=lista->sig;
+    while(cursor){
+        printf("%s  ||$ %.2f\n",cursor->prod.nombre,cursor->prod.precio);
+        cursor=cursor->sig;
     }
-    printf("\n\nTotal : $ %.2f\n",total);
+    printf("\n\nTotal : $ %.2f\n",sumarPreciosProd(lista));
     printf("\n---------------------------------------------\n");
 }
 
@@ -238,4 +235,29 @@ arbolCuenta * restarProductoCuenta (arbolCuenta * mesasOcupadas) ///Resta un pro
         system("pause");
     }
     return mesasOcupadas;
+}
+
+int contarCantidadProductosCuenta (nodoProd * lista)
+{
+    int rta=0;
+    while(lista)
+    {
+        rta++;
+        lista=lista->sig;
+    }
+return rta;
+}
+
+float sumarGastosMesas (arbolCuenta * cuentas)
+{
+    float rta;
+    if(cuentas)
+    {
+        rta=sumarPreciosProd(cuentas->listaProd);
+        rta+=sumarGastosMesas(cuentas->izq);
+        rta+=sumarGastosMesas(cuentas->der);
+    }
+    else
+        rta=0;
+return rta;
 }
