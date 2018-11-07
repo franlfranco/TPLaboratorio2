@@ -55,4 +55,9 @@ void mostrarMesasOcupadas (nodoMesa * lista);
 
 void mostrarEstadisticasMesas(nodoMesa * listaMesas, arbolCuenta * arbolCuentas);
 
+int contarMesasOcupadas (nodoMesa * listaMesas);
+
+float calcularPromedioGastoMesas(nodoMesa * listaMesas, arbolCuenta * arbolCuentas); ///RETORNA PROMEDIO DE GASTO DE MESAS (-1 SI NO HAY MESAS OCUPADAS)
+
+
 #endif /* Mesas_h */
