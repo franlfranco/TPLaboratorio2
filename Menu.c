@@ -343,7 +343,16 @@ void menuPrincipal(void){ ///MAIN
                 menuCuentas(&arbolCuentas,listaProductos);
                 break;
                 
-            case 0:
+            case 0: ///COMPRUEBA QUE NO HAYA MESAS ACTIVAS, SI HAY, ASEGURA EL CIERRE
+                if(arbolCuentas)
+                {
+                    printf("\nHay mesas activas, si se cierra la aplicacion estos datos se borraran...\n\tEsta seguro que desea salir? ingrese s: ");
+                    fflush(stdin);
+                    scanf("%c",&seguro);
+                    if(seguro=='s')
+                        repite=0;
+                }
+                else
                 repite = 0;
                 break;
         }
