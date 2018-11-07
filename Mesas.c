@@ -306,34 +306,64 @@ void mostrarMesasOcupadas (nodoMesa * lista) ///MUESTRA MESAS OCUPADAS
 
 void mostrarEstadisticasMesas(nodoMesa * listaMesas, arbolCuenta * arbolCuentas){
     if(listaMesas){
-        nodoMesa * ultima=buscarUltimoNodoMesa(listaMesas);
-        int n=ultima->mesa.numero;
-        float suma=0;
+        nodoMesa * cursor=listaMesas;
+        float gastosTotales=sumarGastosMesas(arbolCuentas);
         printf("\nMontos por mesas\n");
         printf("Numero | Total | Frecuencia relativa\n");
         printf("-------------------------------\n");
-        while (listaMesas) {
-            if (listaMesas->mesa.ocupada) {
-                arbolCuenta * cuenta=buscarComandaPorNroMesa(arbolCuentas, listaMesas->mesa.numero);
+        while (cursor) {
+            if (cursor->mesa.ocupada) {
+                arbolCuenta * cuenta=buscarComandaPorNroMesa(arbolCuentas, cursor->mesa.numero);
                 int numero=cuenta->mesa.numero;
                 float total=sumarPreciosProd(cuenta->listaProd);
-                float fr=total/(float)n;
-                printf("\t  %i|\t $%.2f|\t%.2f %% \n",numero,total,fr);
+                float fr=0;
+                if(total>0)
+                    fr=(total*100)/gastosTotales;
+                printf("\     %i| $%.2f | %.2f %% \n",numero,total,fr);
                 printf("-------------------------------\n");
-                suma=+total;
             }else{
-                printf("\t  %i|\t $0|\t0%%\n",listaMesas->mesa.numero);
+                printf("\     %i|  $-   |  -   %%\n",cursor->mesa.numero);
                 printf("-------------------------------\n");
             }
-            listaMesas=listaMesas->sig;
+            cursor=cursor->sig;
         }
-        if(suma){
-            float promedio=suma/(float)n;
-            printf("\nEl promedio de venta por mesa es: %.2f\n",promedio);
+        if(gastosTotales){
+            float promedio=calcularPromedioGastoMesas(listaMesas,arbolCuentas);
+            printf("\nEl promedio de venta por mesa es: %.2f \n",promedio);
         }else{
             printf("\nNo se registran ventas\n");
         }
     }else{
         printf("No hay mesas cargadas.\n");
     }
+}
+
+int contarMesasOcupadas (nodoMesa * listaMesas)
+{
+    int rta=0;
+    while(listaMesas)
+    {
+        if(listaMesas->mesa.ocupada==1)
+        {
+            rta++;
+        }
+        listaMesas=listaMesas->sig;
+    }
+return rta;
+}
+
+
+
+float calcularPromedioGastoMesas(nodoMesa * listaMesas, arbolCuenta * arbolCuentas){ ///RETORNA PROMEDIO DE GASTO DE MESAS (-1 SI NO HAY MESAS OCUPADAS)
+    float rta;
+    if(arbolCuentas)
+    {
+        int n=contarMesasOcupadas(listaMesas); ///OK
+        float promedio;
+        promedio=sumarGastosMesas(arbolCuentas)/(float)n;
+        rta=promedio;
+    }
+    else
+        rta=-1;
+return rta;
 }
