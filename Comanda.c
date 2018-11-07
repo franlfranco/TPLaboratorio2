@@ -163,6 +163,7 @@ arbolCuenta * buscarComandaPorCliente (arbolCuenta * actual,char nombre[]) ///fl
 arbolCuenta * sumarProductoCuenta (arbolCuenta * mesasOcupadas,nodoProd * cartaProductos)
 {
     int nroMesa;
+    char control='s';
     nodoProd * nuevo;
     arbolCuenta * actual=inicArbol();
     char nombreProducto[30];
@@ -171,6 +172,8 @@ arbolCuenta * sumarProductoCuenta (arbolCuenta * mesasOcupadas,nodoProd * cartaP
     scanf("%i",&nroMesa);
     actual=buscarComandaPorNroMesa(mesasOcupadas,nroMesa);
     if(actual)
+    {
+        do
         {
             system("cls");
             mostrarComanda(actual);
@@ -191,7 +194,12 @@ arbolCuenta * sumarProductoCuenta (arbolCuenta * mesasOcupadas,nodoProd * cartaP
                 printf("\nNo se encuentra el nombre del producto ingresado...\n");
                 system("pause");
             }
+            printf("\nDesea agregar otro producto? ingrese s:  ");
+            fflush(stdin);
+            scanf("%c",&control);
         }
+        while(control=='s');
+    }
     else
     {
         printf("\nNo se encuentra el numero de mesa actualmente ocupado...\n");
@@ -199,7 +207,6 @@ arbolCuenta * sumarProductoCuenta (arbolCuenta * mesasOcupadas,nodoProd * cartaP
     }
     return mesasOcupadas;
 }
-
 arbolCuenta * restarProductoCuenta (arbolCuenta * mesasOcupadas) ///Resta un producto de la lista del arbol
 {
     int nroMesa;
