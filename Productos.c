@@ -352,3 +352,64 @@ void modificarProducto (char nombreArchivo[],nodoProd * * listaProductos)
                }
     }
 }
+
+/* COMENTO VENTA EN BARRA PORQUE FALTA RETOCARLE UNAS PAVADAS
+void ventaEnBarra (nodoProd * * cartaProductos,char archivoProductos[])
+{
+    char control='s';
+    char nombreProducto[30];
+    do
+    {
+        system("cls");
+        printf("\n----------------Venta en barra---------------\n");
+        printf("\n--------------------Carta--------------------\n");
+        mostrarListProductos(*cartaProductos);
+        printf("\n--------------------Carta--------------------\n");
+        printf("Ingrese nombre del producto que desea agregar a las ventas en la barra: ");
+        fflush(stdin);
+        scanf("%s",&nombreProducto);
+        if(chequearProducto(aProductos,nombreProducto))
+        {
+            if(modificarCantVendidosArchivo(archivoProductos,nombreProducto))
+            {
+                printf("\nProducto agregado con exito.\n");
+                *cartaProductos=inicListaProd();
+                *cartaProductos=archivoToListaProducto(archivoProductos,*cartaProductos);///UNA VEZ MODIFICADO EL ARCHIVO, RECARGA LA LISTA
+            }
+            else
+                printf("\nEl archivo no existe.\n");
+        }
+        else
+        {
+            printf("\nNo se encuentra el nombre del producto ingresado...\n");
+        }
+        printf("\nDesea agregar otro producto? ingrese s:  ");
+        fflush(stdin);
+        scanf("%c",&control);
+    }
+    while(control=='s');
+
+} 
+
+int modificarCantVendidosArchivo (char archivoProductos[],char nombreProducto[])
+{
+    int flag=0;
+    if(fopen(archivoProductos,"rb"))
+    {
+        FILE * archi=fopen(archivoProductos,"r+b");
+        Producto aux;
+        while(fread(&aux,sizeof(Producto),1,archi)>0 && flag==0)
+        {
+            if(strcmp(aux.nombre,nombreProducto)==0)
+            {
+                fseek(archi,sizeof(Producto)*-1,1);
+                aux.cantVendidos++;
+                fwrite(&aux,sizeof(Producto),1,archi);
+                flag=1;
+            }
+        }
+        fclose(archi);
+    }
+return flag;
+}
+*/
