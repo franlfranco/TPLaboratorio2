@@ -34,4 +34,8 @@ arbolCuenta * sumarProductoCuenta (arbolCuenta * mesasOcupadas,nodoProd * cartaP
 
 arbolCuenta * restarProductoCuenta (arbolCuenta * mesasOcupadas);
 
+float sumarGastosMesas (arbolCuenta * cuentas);
+
+int contarCantidadProductosCuenta (nodoProd * lista);
+
 #endif /* Comanda_h */
