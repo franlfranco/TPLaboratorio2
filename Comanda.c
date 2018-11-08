@@ -319,7 +319,8 @@ arbolCuenta * borrarCuenta (arbolCuenta * arbolCuentas, int numMesa)
             {
                 if(!arbolCuentas->izq && !arbolCuentas->der) ///ES HOJA
                 {
-                    
+
+                    free(arbolCuentas->listaProd);
                     free(arbolCuentas);
                     arbolCuentas=inicArbol();
                 }
@@ -327,7 +328,7 @@ arbolCuenta * borrarCuenta (arbolCuenta * arbolCuentas, int numMesa)
                 {
                     if(arbolCuentas->izq) ///TIENE HIJO A LA IZQ
                     {
-                        
+
                         aux=buscarMayor(arbolCuentas->izq);
                         arbolCuentas->mesa=aux->mesa;
                         arbolCuentas->cliente=aux->cliente;
@@ -336,7 +337,7 @@ arbolCuenta * borrarCuenta (arbolCuenta * arbolCuentas, int numMesa)
                     }
                     if(arbolCuentas->der) ///TIENE HIJO A LA DERECHA
                     {
-                        
+
                         aux=buscarMenor(arbolCuentas->der);
                         arbolCuentas->mesa=aux->mesa;
                         arbolCuentas->cliente=aux->cliente;
@@ -352,18 +353,38 @@ arbolCuenta * borrarCuenta (arbolCuenta * arbolCuentas, int numMesa)
     return arbolCuentas;
 }
 
-void cerrarCuenta(arbolCuenta ** arbolCuentas, nodoMesa ** listaMesa, nodoProd ** listaProd, char aProducto[]){
-    int numero;
-    printf("\nIngrese el numero de mesa a cerrar: ");
-    fflush(stdin);
-    scanf("%i",&numero);
-    if(chequearMesaOcupada(*listaMesa, numero)){
-        arbolCuenta * aux=buscarComandaPorNroMesa(*arbolCuentas, numero);
-        cierreListaProductos(aux->listaProd, listaProd, aProducto);
-        desocuparMesa(listaMesa, numero);
-        arbolCuentas=borrarCuenta(arbolCuentas, numero);
-        printf("\nLa vaca esta contenta. :)");
-    }else{
-        printf("\nLa mesa ingresada esta libre o no existe.");
+void cerrarCuenta(arbolCuenta ** arbolCuentas, nodoMesa ** listaMesa, nodoProd ** listaProd, char aProducto[])
+{
+    if(*arbolCuentas)
+    {
+        int numero;
+        char control='s';
+        printf("\nIngrese el numero de mesa a cerrar: ");
+        fflush(stdin);
+        scanf("%i",&numero);
+        if(chequearMesaOcupada(*listaMesa, numero))
+        {
+            arbolCuenta * aux=buscarComandaPorNroMesa(*arbolCuentas, numero);
+            mostrarComanda(aux);
+            printf("\nEsta seguro que desea cerrar la cuenta? ingrese s: ");
+            fflush(stdin);
+            scanf("%c",&control);
+            if(control=='s')
+            {
+                cierreListaProductos(aux->listaProd, listaProd, aProducto);
+                desocuparMesa(listaMesa, numero);
+                *arbolCuentas=borrarCuenta(*arbolCuentas, numero);
+                printf("\nLa vaca esta contenta. :) Mesa cerrada\n");
+            }
+            else
+                printf("\nCancelando el cierre de cuenta.\n");
+        }
+        else
+        {
+            printf("\nLa mesa ingresada esta libre o no existe.");
+        }
     }
+    else
+        printf("\nNo hay ninguna cuenta activa.");
+
 }
