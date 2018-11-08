@@ -45,6 +45,10 @@ void cambiarProductoArchivo (nodoProd * listaProductos,char nombreArchivoProduct
 
 void modificarProducto (char nombreArchivo[],nodoProd * * listaProductos);
 
+void ventaEnBarra (nodoProd * * cartaProductos,char archivoProductos[]);
 
+int contarCantVendidosTodaLista (nodoProd * lista);
+
+void mostrarEstadisticasProductos (nodoProd * listaProductos);
 
 #endif /* Productos_h */
