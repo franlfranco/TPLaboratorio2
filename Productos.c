@@ -353,7 +353,7 @@ void modificarProducto (char nombreArchivo[],nodoProd * * listaProductos)
     }
 }
 
-/* COMENTO VENTA EN BARRA PORQUE FALTA RETOCARLE UNAS PAVADAS
+
 void ventaEnBarra (nodoProd * * cartaProductos,char archivoProductos[])
 {
     char control='s';
@@ -368,16 +368,18 @@ void ventaEnBarra (nodoProd * * cartaProductos,char archivoProductos[])
         printf("Ingrese nombre del producto que desea agregar a las ventas en la barra: ");
         fflush(stdin);
         scanf("%s",&nombreProducto);
-        if(chequearProducto(aProductos,nombreProducto))
+        if(chequearProducto(archivoProductos,nombreProducto))
         {
-            if(modificarCantVendidosArchivo(archivoProductos,nombreProducto))
+            nodoProd * aux=retornarNodoProductoDeLista(*cartaProductos,nombreProducto);
+            int nuevaCant=aux->prod.cantVendidos;
+            nuevaCant++;
+            if(cambiarCantVendidosProductoLista(cartaProductos,nombreProducto,nuevaCant))
             {
+                cambiarProductoArchivo(*cartaProductos,archivoProductos);
                 printf("\nProducto agregado con exito.\n");
-                *cartaProductos=inicListaProd();
-                *cartaProductos=archivoToListaProducto(archivoProductos,*cartaProductos);///UNA VEZ MODIFICADO EL ARCHIVO, RECARGA LA LISTA
             }
             else
-                printf("\nEl archivo no existe.\n");
+                printf("\nError\n");
         }
         else
         {
@@ -389,27 +391,66 @@ void ventaEnBarra (nodoProd * * cartaProductos,char archivoProductos[])
     }
     while(control=='s');
 
-} 
+}
 
-int modificarCantVendidosArchivo (char archivoProductos[],char nombreProducto[])
+int contarCantVendidosTodaLista (nodoProd * lista)
 {
-    int flag=0;
-    if(fopen(archivoProductos,"rb"))
+    int total=0;
+    while(lista)
     {
-        FILE * archi=fopen(archivoProductos,"r+b");
-        Producto aux;
-        while(fread(&aux,sizeof(Producto),1,archi)>0 && flag==0)
-        {
-            if(strcmp(aux.nombre,nombreProducto)==0)
-            {
-                fseek(archi,sizeof(Producto)*-1,1);
-                aux.cantVendidos++;
-                fwrite(&aux,sizeof(Producto),1,archi);
-                flag=1;
-            }
-        }
-        fclose(archi);
+        total+=lista->prod.cantVendidos;
+        lista=lista->sig;
     }
-return flag;
+return total;
+}
+
+void mostrarEstadisticasProductos (nodoProd * listaProductos)
+{
+    if(listaProductos)
+    {
+        int n=contarCantVendidosTodaLista(listaProductos);
+        float ganancia;
+        float porcentaje;
+        Producto aux;
+        printf("\nPorcentaje de venta de productos\n");
+        printf("Producto            | Cant. Vendida | Ingresos generados | Porcentaje \n");
+        printf("-------------------------------------------------------------\n");
+        while(listaProductos)
+        {
+            aux=listaProductos->prod;
+            ganancia=(float)aux.cantVendidos*aux.precio;
+            porcentaje=(float)(aux.cantVendidos*100)/n;
+            printf("%s | %i | $ %.2f | %.2f %% \n",aux.nombre,aux.cantVendidos,ganancia,porcentaje);
+            printf("-------------------------------------------------------------\n");
+            listaProductos=listaProductos->sig;
+        }
+    }
+    else
+    {
+        printf("\nNo hay productos cargados\n");
+    }
+}
+
+/* COMENTO EL PRINCIPIO DEL CIERRE DE CUENTA
+void cierreCuentaProductos (nodoProd * listaProductos,nodoProd * * carta,char archivoProductos[])
+{
+    if(listaProductos) ///1 ER PASO, AGREGAR LO VENDIDO DE LA CUENTA EN LA LISTA Y EL ARCHIVO
+    {
+        nodoProd * aux;
+        Producto actual;
+        int nuevaCant;
+        while(listaProductos)
+        {
+            actual=listaProductos->prod;
+            aux=retornarNodoProductoDeLista(*carta,actual.nombre);
+            nuevaCant=aux->prod.cantVendidos;
+            nuevaCant++;
+            cambiarCantVendidosProductoLista(carta,actual.nombre,nuevaCant);
+            listaProductos=listaProductos->sig;
+        }
+        cambiarProductoArchivo(*carta,archivoProductos);
+    }
+    ///2 PASO: DESOCUPAR MESA
 }
 */
+
