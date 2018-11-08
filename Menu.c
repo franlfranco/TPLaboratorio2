@@ -66,6 +66,7 @@ void menuProductos(nodoProd * * listaProductos){
         printf("\t\t[3]. Modificacion productos\n");
         printf("\t\t[4]. Listado productos\n");
         printf("\t\t[5]. Venta en barra\n");
+        printf("\t\t[6]. Estadisticas de productos\n");
         printf("\t\t[0]. Volver\n");
         printf("\n\t\tIngrese su opcion: ");
         fflush(stdin);
@@ -91,9 +92,12 @@ void menuProductos(nodoProd * * listaProductos){
                 break;
 
             case 5:
+                ventaEnBarra(listaProductos,aProductos);
                 //ventaBarra();
                 break;
-
+            case 6:
+                mostrarEstadisticasProductos(*listaProductos);
+                break;
             case 0:
                 repite = 0;
                 break;
@@ -346,6 +350,7 @@ void menuPrincipal(void){ ///MAIN
             case 0: ///COMPRUEBA QUE NO HAYA MESAS ACTIVAS, SI HAY, ASEGURA EL CIERRE
                 if(arbolCuentas)
                 {
+                    char seguro='n';
                     printf("\nHay mesas activas, si se cierra la aplicacion estos datos se borraran...\n\tEsta seguro que desea salir? ingrese s: ");
                     fflush(stdin);
                     scanf("%c",&seguro);
