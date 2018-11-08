@@ -147,7 +147,17 @@ void testFila (void){
 }
 
 void altaCliente(arbolCuenta ** arbolCuentas, nodoMesa * * listaMesa, Fila * espera){
-    Cliente nuevo=nuevoCliente();
+    int nombreRepetido;
+    Cliente nuevo;
+    do
+    {
+        nuevo=nuevoCliente();
+        nombreRepetido=chequearCliente(*arbolCuentas,*espera,nuevo.nombre);
+        if(nombreRepetido)
+            printf("\nEse nombre ya se encuentra en uso, por favor ingrese otro\n");
+        else
+            nombreRepetido=0;
+    }while(nombreRepetido);
     if(chequearDisponibilidadMesas(*listaMesa)){
         printf("Cliente al arbol\n");
         *arbolCuentas=agregarHojaArbolCuentas(*arbolCuentas, ingresarClienteANodoArbol(listaMesa, nuevo));
@@ -245,4 +255,24 @@ void mostrarClientesAtendidos (arbolCuenta * arbol){ ///Muestra el arbol de coma
         mostrarClientesYMesas(arbol);
         mostrarClientesAtendidos(arbol->der);
     }
+}
+
+int chequearCliente (arbolCuenta * arbolcuentas,Fila espera,char nombreNuevo[])
+{
+    int flag=0;
+    Cliente aux;
+    nodoCliente * cliente=espera.cabecera;
+    arbolCuenta * busqueda=inicArbol();
+    while(cliente && flag==0)
+    {
+        aux=cliente->cliente;
+        if(strcmp(aux.nombre,nombreNuevo)==0)
+            flag=1;
+        else
+            cliente=cliente->sig;
+    }
+    busqueda=buscarComandaPorCliente(arbolcuentas,nombreNuevo);
+    if(busqueda)
+        flag=1;
+return flag;
 }
