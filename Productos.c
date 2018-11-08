@@ -387,7 +387,7 @@ void ventaEnBarra (nodoProd * * cartaProductos,char archivoProductos[])
         }
         printf("\nDesea agregar otro producto? ingrese s:  ");
         fflush(stdin);
-        scanf("%c",&control);
+        scanf(" %c",&control);
     }
     while(control=='s');
 
@@ -431,8 +431,7 @@ void mostrarEstadisticasProductos (nodoProd * listaProductos)
     }
 }
 
-/* COMENTO EL PRINCIPIO DEL CIERRE DE CUENTA
-void cierreCuentaProductos (nodoProd * listaProductos,nodoProd * * carta,char archivoProductos[])
+void cierreListaProductos (nodoProd * listaProductos,nodoProd * * carta,char archivoProductos[])
 {
     if(listaProductos) ///1 ER PASO, AGREGAR LO VENDIDO DE LA CUENTA EN LA LISTA Y EL ARCHIVO
     {
@@ -450,7 +449,5 @@ void cierreCuentaProductos (nodoProd * listaProductos,nodoProd * * carta,char ar
         }
         cambiarProductoArchivo(*carta,archivoProductos);
     }
-    ///2 PASO: DESOCUPAR MESA
 }
-*/
 

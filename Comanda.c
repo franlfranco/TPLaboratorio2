@@ -117,7 +117,7 @@ arbolCuenta * ingresarClienteANodoArbol (nodoMesa * * listaMesa, Cliente nuevoCl
     return nuevo;
 }
 
-arbolCuenta * buscarComandaPorNroMesa (arbolCuenta * actual,int nro) ///flag == 0 no se encontro la mesa
+arbolCuenta * buscarComandaPorNroMesa (arbolCuenta * actual,int nro)
 {
     arbolCuenta * rta=inicArbol();
     if(actual)
@@ -193,7 +193,7 @@ arbolCuenta * sumarProductoCuenta (arbolCuenta * mesasOcupadas,nodoProd * cartaP
             }
             printf("\nDesea agregar otro producto? ingrese s:  ");
             fflush(stdin);
-            scanf("%c",&control);
+            scanf(" %c",&control);
         }
         while(control=='s');
     }
@@ -207,7 +207,7 @@ arbolCuenta * sumarProductoCuenta (arbolCuenta * mesasOcupadas,nodoProd * cartaP
 arbolCuenta * restarProductoCuenta (arbolCuenta * mesasOcupadas) ///Resta un producto de la lista del arbol
 {
     int nroMesa;
-    nodoProd * nuevo;
+    //nodoProd * nuevo;
     arbolCuenta * actual=inicArbol();
     char nombreProducto[30];
     printf("\nIngrese nro de mesa a buscar a modificar: ");
@@ -267,4 +267,103 @@ float sumarGastosMesas (arbolCuenta * cuentas)
     else
         rta=0;
 return rta;
+}
+
+arbolCuenta * buscarMenor (arbolCuenta * main)
+{
+    arbolCuenta * rta=inicArbol();
+    if(main)
+    {
+        rta=main;
+        arbolCuenta * aux=buscarMenor(main->izq);
+        if(aux && aux->mesa.numero<rta->mesa.numero)
+        {
+            rta=aux;
+        }
+    }
+    return rta;
+}
+
+arbolCuenta * buscarMayor (arbolCuenta * main)
+{
+    arbolCuenta * rta=inicArbol();
+    if(main)
+    {
+        rta=main;
+        arbolCuenta * aux=buscarMayor(main->der);
+        if(aux && aux->mesa.numero>rta->mesa.numero)
+        {
+            rta=aux;
+        }
+    }
+    return rta;
+}
+
+arbolCuenta * borrarCuenta (arbolCuenta * arbolCuentas, int numMesa)
+{
+    if(arbolCuentas) ///SI MAIN TIENE DATOS
+    {
+        arbolCuentas->izq=borrarCuenta(arbolCuentas->izq,numMesa);
+        if(arbolCuentas->mesa.numero==numMesa) ///SI EL MATCH SE DA EN EL NODO ACTUAL
+        {
+            arbolCuenta * aux;
+            if(arbolCuentas->izq && arbolCuentas->der) ///TIENE DOS HIJOS
+            {
+                aux=buscarMayor(arbolCuentas->izq);
+                arbolCuentas->mesa=aux->mesa;
+                arbolCuentas->cliente=aux->cliente;
+                arbolCuentas->listaProd=aux->listaProd;
+                arbolCuentas->izq=borrarCuenta(arbolCuentas->izq,arbolCuentas->mesa.numero);
+            }
+            else ///TIENE 1 O NINGUN HIJO
+            {
+                if(!arbolCuentas->izq && !arbolCuentas->der) ///ES HOJA
+                {
+                    
+                    free(arbolCuentas);
+                    arbolCuentas=inicArbol();
+                }
+                else
+                {
+                    if(arbolCuentas->izq) ///TIENE HIJO A LA IZQ
+                    {
+                        
+                        aux=buscarMayor(arbolCuentas->izq);
+                        arbolCuentas->mesa=aux->mesa;
+                        arbolCuentas->cliente=aux->cliente;
+                        arbolCuentas->listaProd=aux->listaProd;
+                        arbolCuentas->izq=borrarCuenta(arbolCuentas->izq,aux->mesa.numero);
+                    }
+                    if(arbolCuentas->der) ///TIENE HIJO A LA DERECHA
+                    {
+                        
+                        aux=buscarMenor(arbolCuentas->der);
+                        arbolCuentas->mesa=aux->mesa;
+                        arbolCuentas->cliente=aux->cliente;
+                        arbolCuentas->listaProd=aux->listaProd;
+                        arbolCuentas->der=borrarCuenta(arbolCuentas->der,arbolCuentas->mesa.numero);
+                    }
+                }
+            }
+        }
+        if(arbolCuentas)
+            arbolCuentas->der=borrarCuenta(arbolCuentas->der,arbolCuentas->mesa.numero);
+    }
+    return arbolCuentas;
+}
+
+void cerrarCuenta(arbolCuenta ** arbolCuentas, nodoMesa ** listaMesa, nodoProd ** listaProd, char aProducto[]){
+    int numero;
+    printf("\nIngrese el numero de mesa a cerrar: ");
+    fflush(stdin);
+    scanf("%i",&numero);
+    if(chequearMesaOcupada(*listaMesa, numero)){
+        arbolCuenta * aux=buscarComandaPorNroMesa(*arbolCuentas, numero);
+        cierreListaProductos(aux->listaProd, listaProd, aProducto);
+        desocuparMesa(listaMesa, numero);
+        arbolCuentas=borrarCuenta(arbolCuentas, numero);
+        printf("\nLa vaca esta contenta. :)");
+    }else{
+        printf("\nLa mesa ingresada esta libre o no existe.");
+    }
 }

@@ -319,10 +319,10 @@ void mostrarEstadisticasMesas(nodoMesa * listaMesas, arbolCuenta * arbolCuentas)
                 float fr=0;
                 if(total>0)
                     fr=(total*100)/gastosTotales;
-                printf("\     %i| $%.2f | %.2f %% \n",numero,total,fr);
+                printf("\n     %i| $%.2f | %.2f %% \n",numero,total,fr);
                 printf("-------------------------------\n");
             }else{
-                printf("\     %i|  $-   |  -   %%\n",cursor->mesa.numero);
+                printf("\n     %i|  $-   |  -   %%\n",cursor->mesa.numero);
                 printf("-------------------------------\n");
             }
             cursor=cursor->sig;
@@ -352,8 +352,6 @@ int contarMesasOcupadas (nodoMesa * listaMesas)
 return rta;
 }
 
-
-
 float calcularPromedioGastoMesas(nodoMesa * listaMesas, arbolCuenta * arbolCuentas){ ///RETORNA PROMEDIO DE GASTO DE MESAS (-1 SI NO HAY MESAS OCUPADAS)
     float rta;
     if(arbolCuentas)
@@ -366,4 +364,31 @@ float calcularPromedioGastoMesas(nodoMesa * listaMesas, arbolCuenta * arbolCuent
     else
         rta=-1;
 return rta;
+}
+
+void desocuparMesa(nodoMesa ** listaMesas, int numMesa){
+    if(*listaMesas){
+        nodoMesa * cursor=*listaMesas;
+        while (cursor) {
+            if(cursor->mesa.numero==numMesa){
+                cursor->mesa.ocupada=0;
+            }else{
+                cursor=cursor->sig;
+            }
+        }
+    }
+}
+
+int chequearMesaOcupada(nodoMesa * listaMesa, int numMesa){
+    int flag=0;
+    if(listaMesa){
+        while (listaMesa&&!flag) {
+            if(listaMesa->mesa.numero==numMesa && listaMesa->mesa.ocupada){
+                flag=1;
+            }else{
+                listaMesa=listaMesa->sig;
+            }
+        }
+    }
+    return flag;
 }

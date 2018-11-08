@@ -5,7 +5,7 @@
 
 #include "Menu.h"
 
-void menuCuentas(arbolCuenta ** arbolCuentas,nodoProd * listaProductos){
+void menuCuentas(arbolCuenta ** arbolCuentas,nodoProd ** listaProductos, nodoMesa ** listaMesa){
     char repite = 1;
     int opcion = -1;
 
@@ -30,7 +30,7 @@ void menuCuentas(arbolCuenta ** arbolCuentas,nodoProd * listaProductos){
                 break;
 
             case 2:
-                *arbolCuentas=sumarProductoCuenta(*arbolCuentas,listaProductos);
+                *arbolCuentas=sumarProductoCuenta(*arbolCuentas,*listaProductos);
                 //agregarProducto();
                 break;
 
@@ -40,7 +40,7 @@ void menuCuentas(arbolCuenta ** arbolCuentas,nodoProd * listaProductos){
                 break;
 
             case 4:
-                //cerrarCuenta();
+                cerrarCuenta(arbolCuentas, listaMesa, listaProductos, aProductos);
                 break;
 
                 
@@ -344,7 +344,7 @@ void menuPrincipal(void){ ///MAIN
                 break;
 
             case 4:
-                menuCuentas(&arbolCuentas,listaProductos);
+                menuCuentas(&arbolCuentas, &listaProductos, &listaMesas);
                 break;
                 
             case 0: ///COMPRUEBA QUE NO HAYA MESAS ACTIVAS, SI HAY, ASEGURA EL CIERRE
@@ -353,7 +353,7 @@ void menuPrincipal(void){ ///MAIN
                     char seguro='n';
                     printf("\nHay mesas activas, si se cierra la aplicacion estos datos se borraran...\n\tEsta seguro que desea salir? ingrese s: ");
                     fflush(stdin);
-                    scanf("%c",&seguro);
+                    scanf(" %c",&seguro);
                     if(seguro=='s')
                         repite=0;
                 }

@@ -59,5 +59,8 @@ int contarMesasOcupadas (nodoMesa * listaMesas);
 
 float calcularPromedioGastoMesas(nodoMesa * listaMesas, arbolCuenta * arbolCuentas); ///RETORNA PROMEDIO DE GASTO DE MESAS (-1 SI NO HAY MESAS OCUPADAS)
 
+void desocuparMesa(nodoMesa ** listaMesas, int numMesa);//Funcion que desocupa mesa, auxiliar de cerrarCuenta
+
+int chequearMesaOcupada(nodoMesa * listaMesa, int numMesa);//Retorna 1 si la mesa esta ocupada
 
 #endif /* Mesas_h */

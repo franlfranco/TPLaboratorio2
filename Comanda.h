@@ -26,7 +26,7 @@ int ocuparMesa (nodoMesa ** lista,Mesa * pedida,int nro); ///PIDE LISTA, STRUCT 
 
 arbolCuenta * ingresarClienteANodoArbol (nodoMesa * * listaMesa, Cliente nuevoCliente);//Ingresa un cliente a un nodoArbol, y asigna mesa
 
-arbolCuenta * buscarComandaPorNroMesa (arbolCuenta * actual,int nro); ///flag == 0 no se encontro la mesa
+arbolCuenta * buscarComandaPorNroMesa (arbolCuenta * actual,int nro); //Retorna nodo
 
 arbolCuenta * buscarComandaPorCliente (arbolCuenta * actual,char nombre[]);
 
@@ -37,5 +37,13 @@ arbolCuenta * restarProductoCuenta (arbolCuenta * mesasOcupadas);
 float sumarGastosMesas (arbolCuenta * cuentas);
 
 int contarCantidadProductosCuenta (nodoProd * lista);
+
+arbolCuenta * buscarMenor (arbolCuenta * main);//Funcion auxiliar a borrarCuenta
+
+arbolCuenta * buscarMayor (arbolCuenta * main);//Funcion auxiliar a borrarCuenta
+
+arbolCuenta * borrarCuenta (arbolCuenta * arbolCuentas, int numMesa);//Funcion auxiliar a cerrarCuenta
+
+void cerrarCuenta(arbolCuenta ** arbolCuentas, nodoMesa ** listaMesa, nodoProd ** listaProd, char aProducto[]);//Funcion que cierrar cuenta, al menu
 
 #endif /* Comanda_h */

@@ -51,4 +51,6 @@ int contarCantVendidosTodaLista (nodoProd * lista);
 
 void mostrarEstadisticasProductos (nodoProd * listaProductos);
 
+void cierreListaProductos (nodoProd * listaProductos,nodoProd * * carta,char archivoProductos[]);//Funcion que pasa la lista del arbol, auxiliar de cerrarCuenta
+
 #endif /* Productos_h */
