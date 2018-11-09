@@ -367,11 +367,13 @@ return rta;
 }
 
 void desocuparMesa(nodoMesa ** listaMesas, int numMesa){
+    int flag=0;
     if(*listaMesas){
         nodoMesa * cursor=*listaMesas;
-        while (cursor) {
+        while (cursor && flag==0) {
             if(cursor->mesa.numero==numMesa){
                 cursor->mesa.ocupada=0;
+                flag=1;
             }else{
                 cursor=cursor->sig;
             }
