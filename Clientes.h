@@ -42,4 +42,5 @@ void mostrarClientesYMesas (arbolCuenta * comanda);//Funcion auxiliar a mostrarC
 
 void mostrarClientesAtendidos (arbolCuenta * arbol);//Muestra todos los clientes atendidos y la mesa que ocupan.
 
+int chequearCliente (arbolCuenta * arbolcuentas,Fila espera,char nombreNuevo[]);
 #endif /* Clientes_h */
