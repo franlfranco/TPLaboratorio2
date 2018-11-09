@@ -1,8 +1,8 @@
-//Trabajo práctico final Laboratorio 2
-//Matias Ceraño - Francisco Franco - Luca Ciriaco
-//#LaVacaBar
-//Libreria Comanda
-
+///////////////////////////////////////////////////
+//Trabajo práctico final Laboratorio 2           //
+//Matias Ceraño - Francisco Franco - Luca Ciriaco//
+//              #LaVacaBar                       //
+///////////////////////////////////////////////////
 #include "Comanda.h"
 #include "Clientes.h"
 #include "Mesas.h"
@@ -101,7 +101,7 @@ arbolCuenta * ingresarClienteANodoArbol (nodoMesa * * listaMesa, Cliente nuevoCl
         printf("Ingrese el numero de Mesa para %s\n- ",nuevoCliente.nombre);
         fflush(stdin);
         scanf("%i",&elegir);
-        
+
         if(!ocuparMesa(listaMesa,&mesa,elegir))//retorna 1 si la mesa esta libre
         {
             printf("\nEl numero de mesa ingresada es incorrecto o esta ocupada. Ingrese nuevamente\n");

@@ -1,8 +1,8 @@
-//Trabajo práctico final Laboratorio 2
-//Matias Ceraño - Francisco Franco - Luca Ciriaco
-//#LaVacaBar
-//Libreria Mesas
-
+///////////////////////////////////////////////////
+//Trabajo práctico final Laboratorio 2           //
+//Matias Ceraño - Francisco Franco - Luca Ciriaco//
+//              #LaVacaBar                       //
+///////////////////////////////////////////////////
 #ifndef Mesas_h
 #define Mesas_h
 
@@ -47,7 +47,7 @@ int chequearExistenciaMesa(nodoMesa * listaMesa, int nro);//Funcion que chequea 
 
 void mostrarMesaIndividualXNumero(nodoMesa * listaMesa, arbolCuenta * arbolCuentas);//Muestra una sola mesa, busca por numero
 
-void mostrarMesaIndividualXNombre(nodoMesa * listaMesa, arbolCuenta * arbolCuentas); 
+void mostrarMesaIndividualXNombre(nodoMesa * listaMesa, arbolCuenta * arbolCuentas);
 
 void mostrarTodasLasMesas (nodoMesa * listaMesas,arbolCuenta * arbolCuentas);
 
