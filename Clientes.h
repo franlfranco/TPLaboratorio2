@@ -1,8 +1,8 @@
-//Trabajo práctico final Laboratorio 2
-//Matias Ceraño - Francisco Franco - Luca Ciriaco
-//#LaVacaBar
-//Libreria Clientes
-
+///////////////////////////////////////////////////
+//Trabajo práctico final Laboratorio 2           //
+//Matias Ceraño - Francisco Franco - Luca Ciriaco//
+//              #LaVacaBar                       //
+///////////////////////////////////////////////////
 #ifndef Clientes_h
 #define Clientes_h
 

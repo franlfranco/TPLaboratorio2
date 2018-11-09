@@ -1,8 +1,8 @@
-//Trabajo práctico final Laboratorio 2
-//Matias Ceraño - Francisco Franco - Luca Ciriaco
-//#LaVacaBar
-//Libreria Productos
-
+///////////////////////////////////////////////////
+//Trabajo práctico final Laboratorio 2           //
+//Matias Ceraño - Francisco Franco - Luca Ciriaco//
+//              #LaVacaBar                       //
+///////////////////////////////////////////////////
 #ifndef Productos_h
 #define Productos_h
 

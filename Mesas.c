@@ -1,8 +1,8 @@
-//Trabajo práctico final Laboratorio 2
-//Matias Ceraño - Francisco Franco
-//#LaVacaBar
-//Libreria Mesas
-
+///////////////////////////////////////////////////
+//Trabajo práctico final Laboratorio 2           //
+//Matias Ceraño - Francisco Franco - Luca Ciriaco//
+//              #LaVacaBar                       //
+///////////////////////////////////////////////////
 #include "Mesas.h"
 
 nodoMesa * inicListaMesa(void){
@@ -236,7 +236,7 @@ int chequearExistenciaMesa(nodoMesa * listaMesa, int nro){
 
 void mostrarMesaIndividualXNumero(nodoMesa * listaMesa, arbolCuenta * arbolCuentas){
     int nro;
-    
+
     printf("\nIngrese el numero de mesa a mostrar: ");
     fflush(stdin);
     scanf("%i",&nro);

@@ -1,3 +1,9 @@
+///////////////////////////////////////////////////
+//Trabajo práctico final Laboratorio 2           //
+//Matias Ceraño - Francisco Franco - Luca Ciriaco//
+//              #LaVacaBar                       //
+///////////////////////////////////////////////////
+
 #ifndef Funciones_h
 #define Funciones_h
 
