@@ -5,49 +5,64 @@
 ///////////////////////////////////////////////////
 #include "Mesas.h"
 
-nodoMesa * inicListaMesa(void){
+nodoMesa * inicListaMesa(void)
+{
     return NULL;
 }
 
-nodoMesa * crearNodoMesa(Mesa mesa){
+nodoMesa * crearNodoMesa(Mesa mesa)
+{
     nodoMesa * aux=(nodoMesa*)malloc(sizeof(nodoMesa));
     aux->mesa=mesa;
     aux->sig=NULL;
     return aux;
 }
 
-nodoMesa * buscarUltimoNodoMesa(nodoMesa * listaMesa){//Busca ultimo nodo de la LISTA mesa
+nodoMesa * buscarUltimoNodoMesa(nodoMesa * listaMesa) //Busca ultimo nodo de la LISTA mesa
+{
     nodoMesa * aux=listaMesa;
-    while(aux->sig){
+    while(aux->sig)
+    {
         aux=aux->sig;
     }
     return aux;
 }
 
-nodoMesa * agregarMesaFinal(nodoMesa * listaMesa, nodoMesa * nuevo){
-    if(!listaMesa){
+nodoMesa * agregarMesaFinal(nodoMesa * listaMesa, nodoMesa * nuevo)
+{
+    if(!listaMesa)
+    {
         listaMesa=nuevo;
-    }else{
+    }
+    else
+    {
         nodoMesa * aux=buscarUltimoNodoMesa(listaMesa);
         aux->sig=nuevo;
     }
     return listaMesa;
 }
 
-Mesa nuevaMesaArchivo (char archivoMesas[],int ultimaMesa){ ///AGREGA UNA MESA AL ARCHIVO CON EL NUMERO ULTIMO+1
+Mesa nuevaMesaArchivo (char archivoMesas[],int ultimaMesa)  ///AGREGA UNA MESA AL ARCHIVO CON EL NUMERO ULTIMO+1
+{
     Mesa nueva;
     nueva.numero=ultimaMesa+1;
     nueva.ocupada=0;
     FILE * archi=fopen(archivoMesas,"ab");
     fwrite(&nueva,sizeof(Mesa),1,archi);
     fclose(archi);
+    system("cls");
+    tituloPrincipal();
+    lineaVerde();
     printf("Carga de la mesa nro: %i fue exitosa\n",nueva.numero);
+    lineaVerde();
+    printf("\n\n\n\n\n\n\n\n");
     system("pause");
     system("cls");
     return nueva;
 }
 
-int buscarUltimaMesaArchivo (char archivoMesas[]){ ///RETORNA ULTIMO NUMERO DE MESA / 0 SI NO HAY ARCHIVO
+int buscarUltimaMesaArchivo (char archivoMesas[])  ///RETORNA ULTIMO NUMERO DE MESA / 0 SI NO HAY ARCHIVO
+{
     int rta=0;
     if(fopen(archivoMesas,"rb"))
     {
@@ -60,36 +75,47 @@ int buscarUltimaMesaArchivo (char archivoMesas[]){ ///RETORNA ULTIMO NUMERO DE M
     }
     else
     {
+        lineaRoja();
         printf("Archivo - %s - no encontrado...\n",archivoMesas);
+        lineaRoja();
     }
     return rta;
 }
 
-nodoMesa * buscarUltimaMesaLista(nodoMesa * listaMesa){
-    if(listaMesa){
-        while(listaMesa->sig){
+nodoMesa * buscarUltimaMesaLista(nodoMesa * listaMesa)
+{
+    if(listaMesa)
+    {
+        while(listaMesa->sig)
+        {
             listaMesa=listaMesa->sig;
         }
     }
     return listaMesa;
 }
 
-nodoMesa * agregarFinalListaMesa(nodoMesa * listaMesa, nodoMesa * nuevo){
+nodoMesa * agregarFinalListaMesa(nodoMesa * listaMesa, nodoMesa * nuevo)
+{
     nodoMesa * ultimo=buscarUltimaMesaLista(listaMesa);
-    if(listaMesa){
+    if(listaMesa)
+    {
         ultimo->sig=nuevo;
-    }else{
+    }
+    else
+    {
         listaMesa=nuevo;
     }
     return listaMesa;
 }
 
-void altaMesa(char archivoMesas[], nodoMesa * * listaMesas){
+void altaMesa(char archivoMesas[], nodoMesa * * listaMesas)
+{
     Mesa nueva=nuevaMesaArchivo(archivoMesas, buscarUltimaMesaArchivo(archivoMesas));
     *listaMesas=agregarFinalListaMesa(*listaMesas, crearNodoMesa(nueva));
 }
 
-nodoMesa * archivoToListaMesa (char archivoMesas[], nodoMesa * listaMesa){ ///CARGA DESDE EL ARCHIVO DE MESA A LA LISTA, RETORNA VALIDOS
+nodoMesa * archivoToListaMesa (char archivoMesas[], nodoMesa * listaMesa)  ///CARGA DESDE EL ARCHIVO DE MESA A LA LISTA, RETORNA VALIDOS
+{
     listaMesa=inicListaMesa();
     if(fopen(archivoMesas,"rb"))
     {
@@ -103,24 +129,37 @@ nodoMesa * archivoToListaMesa (char archivoMesas[], nodoMesa * listaMesa){ ///CA
     }
     else
     {
-        printf("No se encontro el archivo...Creando %s\n",archivoMesas); ///Si no encuentra el archivo, lo crea...
+        lineaRoja();
+        printf("No se encontro el archivo...Creando %s\n\a",archivoMesas); ///Si no encuentra el archivo, lo crea...
+        lineaRoja();
         fopen(archivoMesas,"wb");
     }
     return listaMesa;
 }
 
-void mostrarMesa(int nro, int ocupada, char nombreCliente[30]){
-    printf("\nNumero mesa: %i",nro);
-    if (ocupada) {
+void mostrarMesa(int nro, int ocupada, char nombreCliente[30])
+{
+    system("cls");
+    tituloPrincipal();
+    printf("Numero mesa: %i",nro);
+    if (ocupada)
+    {
         printf("\nCliente: %s\n",nombreCliente);
-    }else{
+        linea();
+    }
+    else
+    {
         printf("\nLIBRE\n");
+        linea();
     }
 }
 
 void mostrarMesasLibres (nodoMesa * lista) ///MUESTRA MESAS LIBRES, RETORNA CANTIDAD / 0 SI NO HAY
 {
-    printf("\n--Mesas libres--\n");
+    system("cls");
+    tituloPrincipal();
+    printf("Mesas libres\n");
+    linea();
     while(lista)
     {
         if(lista->mesa.ocupada==0)
@@ -129,17 +168,24 @@ void mostrarMesasLibres (nodoMesa * lista) ///MUESTRA MESAS LIBRES, RETORNA CANT
         }
         lista=lista->sig;
     }
+    system("pause");
 }
 
-nodoMesa * bajaMesaLista(nodoMesa * listaMesa){
-    if(listaMesa){
-        if(!listaMesa->sig){
+nodoMesa * bajaMesaLista(nodoMesa * listaMesa)
+{
+    if(listaMesa)
+    {
+        if(!listaMesa->sig)
+        {
             free(listaMesa);
             listaMesa=inicListaMesa();
-        }else{
+        }
+        else
+        {
             nodoMesa * cursor=listaMesa->sig;
             nodoMesa * ante=listaMesa;
-            while (cursor->sig) {
+            while (cursor->sig)
+            {
                 ante=cursor;
                 cursor=cursor->sig;
             }
@@ -173,30 +219,51 @@ void bajaArchivoMesa(char archivoMesa[],nodoMesa * listaMesasActualizada)
     }
 }
 
-void bajaMesa(nodoMesa * * listaMesa, char archivoMesa[]){
+void bajaMesa(nodoMesa * * listaMesa, char archivoMesa[])
+{
     if(*listaMesa)
     {
         nodoMesa * ultimo=buscarUltimoNodoMesa(*listaMesa);
-        if(ultimo->mesa.ocupada==0){
-                *listaMesa=bajaMesaLista(*listaMesa);
-                bajaArchivoMesa(archivoMesa,*listaMesa);
+        if(ultimo->mesa.ocupada==0)
+        {
+            *listaMesa=bajaMesaLista(*listaMesa);
+            bajaArchivoMesa(archivoMesa,*listaMesa);
+            system("cls");
+            tituloPrincipal();
+            lineaVerde();
             printf("Se elimino la mesa correctamente\n");
-        }else{
+            lineaVerde();
+            printf("\n\n\n\n\n\n\n\n");
+        }
+        else
+        {
+            system("cls");
+            tituloPrincipal();
+            lineaRoja();
             printf("La mesa numero %i esta ocupada\n",ultimo->mesa.numero);
-
+            lineaRoja();
+            printf("\n\n\n\n\n\n\n\n");
         }
     }
     else
     {
+        system("cls");
+        tituloPrincipal();
+        lineaRoja();
         printf("No hay mesas para dar de baja...\n");
+        lineaRoja();
+        printf("\n\n\n\n\n\n\n\n");
     }
-system("pause");
+    system("pause");
 }
 
-int chequearDisponibilidadMesas(nodoMesa * listaMesa){
+int chequearDisponibilidadMesas(nodoMesa * listaMesa)
+{
     int rta=0;
-    while(listaMesa){
-        if(!listaMesa->mesa.ocupada){
+    while(listaMesa)
+    {
+        if(!listaMesa->mesa.ocupada)
+        {
             rta++;
         }
         listaMesa=listaMesa->sig;
@@ -208,6 +275,7 @@ void mostrarArchivoYFilaMesa (char nombreArchivo[],nodoMesa * lista)
 {
     FILE * archi=fopen(nombreArchivo,"rb");
     Mesa aux;
+    system("cls");
     printf("\nArchivo:\n");
     while(fread(&aux,sizeof(Mesa),1,archi)>0)
     {
@@ -222,38 +290,51 @@ void mostrarArchivoYFilaMesa (char nombreArchivo[],nodoMesa * lista)
     printf("\n");
 }
 
-int chequearExistenciaMesa(nodoMesa * listaMesa, int nro){
+int chequearExistenciaMesa(nodoMesa * listaMesa, int nro)
+{
     int flag=0;
-    while (listaMesa&&!flag) {
-        if(listaMesa->mesa.numero==nro){
+    while (listaMesa&&!flag)
+    {
+        if(listaMesa->mesa.numero==nro)
+        {
             flag=1;
-        }else{
+        }
+        else
+        {
             listaMesa=listaMesa->sig;
         }
     }
     return flag;
 }
 
-void mostrarMesaIndividualXNumero(nodoMesa * listaMesa, arbolCuenta * arbolCuentas){
+void mostrarMesaIndividualXNumero(nodoMesa * listaMesa, arbolCuenta * arbolCuentas)
+{
     int nro;
 
     printf("\nIngrese el numero de mesa a mostrar: ");
     fflush(stdin);
     scanf("%i",&nro);
-    if (chequearExistenciaMesa(listaMesa, nro)) {
+    if (chequearExistenciaMesa(listaMesa, nro))
+    {
         arbolCuenta * aux=inicArbol();
         aux=buscarComandaPorNroMesa(arbolCuentas, nro);
-        if(aux){
+        if(aux)
+        {
             mostrarMesa(nro, 1, aux->cliente.nombre);
-        }else{
+        }
+        else
+        {
             mostrarMesa(nro, 0, " ");
         }
-    }else{
+    }
+    else
+    {
         printf("La mesa no existe.\n");
     }
 }
 
-void mostrarMesaIndividualXNombre(nodoMesa * listaMesa, arbolCuenta * arbolCuentas){
+void mostrarMesaIndividualXNombre(nodoMesa * listaMesa, arbolCuenta * arbolCuentas)
+{
     //int nro;
     char nombre[30];
     //printf("\nIngrese el numero de mesa a mostrar: ");
@@ -293,26 +374,38 @@ void mostrarTodasLasMesas (nodoMesa * listaMesas,arbolCuenta * arbolCuentas)
 
 void mostrarMesasOcupadas (nodoMesa * lista) ///MUESTRA MESAS OCUPADAS
 {
-    printf("\n--Mesas ocupadas--\n");
+    system("cls");
+    tituloPrincipal();
+    linea();
+    printf("Mesas ocupadas\n");
     while(lista)
     {
         if(lista->mesa.ocupada==1)
         {
             printf("Mesa: %i\n",lista->mesa.numero);
+            linea();
         }
         lista=lista->sig;
     }
+    system("pause");
 }
 
-void mostrarEstadisticasMesas(nodoMesa * listaMesas, arbolCuenta * arbolCuentas){
-    if(listaMesas){
+void mostrarEstadisticasMesas(nodoMesa * listaMesas, arbolCuenta * arbolCuentas)
+{
+    if(listaMesas)
+    {
         nodoMesa * cursor=listaMesas;
         float gastosTotales=sumarGastosMesas(arbolCuentas);
-        printf("\nMontos por mesas\n");
-        printf("Numero | Total | Frecuencia relativa\n");
-        printf("-------------------------------\n");
-        while (cursor) {
-            if (cursor->mesa.ocupada) {
+        system("cls");
+        tituloPrincipal();
+        printf("\tMontos por mesas\n");
+        linea();
+        printf("\tNumero | Total | Frecuencia relativa\n");
+        linea();
+        while (cursor)
+        {
+            if (cursor->mesa.ocupada)
+            {
                 arbolCuenta * cuenta=buscarComandaPorNroMesa(arbolCuentas, cursor->mesa.numero);
                 int numero=cuenta->mesa.numero;
                 float total=sumarPreciosProd(cuenta->listaProd);
@@ -320,22 +413,33 @@ void mostrarEstadisticasMesas(nodoMesa * listaMesas, arbolCuenta * arbolCuentas)
                 if(total>0)
                     fr=(total*100)/gastosTotales;
                 printf("\n     %i| $%.2f | %.2f %% \n",numero,total,fr);
-                printf("-------------------------------\n");
-            }else{
+                linea();
+            }
+            else
+            {
                 printf("\n     %i|  $-   |  -   %%\n",cursor->mesa.numero);
-                printf("-------------------------------\n");
+                linea();
             }
             cursor=cursor->sig;
         }
-        if(gastosTotales){
+        if(gastosTotales)
+        {
             float promedio=calcularPromedioGastoMesas(listaMesas,arbolCuentas);
             printf("\nEl promedio de venta por mesa es: %.2f \n",promedio);
-        }else{
-            printf("\nNo se registran ventas\n");
         }
-    }else{
+        else
+        {
+            lineaRoja();
+            printf("No se registran ventas\n");
+            lineaRoja();
+            printf("\n\n\n\n\n");
+        }
+    }
+    else
+    {
         printf("No hay mesas cargadas.\n");
     }
+    system("pause");
 }
 
 int contarMesasOcupadas (nodoMesa * listaMesas)
@@ -349,10 +453,11 @@ int contarMesasOcupadas (nodoMesa * listaMesas)
         }
         listaMesas=listaMesas->sig;
     }
-return rta;
+    return rta;
 }
 
-float calcularPromedioGastoMesas(nodoMesa * listaMesas, arbolCuenta * arbolCuentas){ ///RETORNA PROMEDIO DE GASTO DE MESAS (-1 SI NO HAY MESAS OCUPADAS)
+float calcularPromedioGastoMesas(nodoMesa * listaMesas, arbolCuenta * arbolCuentas)  ///RETORNA PROMEDIO DE GASTO DE MESAS (-1 SI NO HAY MESAS OCUPADAS)
+{
     float rta;
     if(arbolCuentas)
     {
@@ -363,31 +468,43 @@ float calcularPromedioGastoMesas(nodoMesa * listaMesas, arbolCuenta * arbolCuent
     }
     else
         rta=-1;
-return rta;
+    return rta;
 }
 
-void desocuparMesa(nodoMesa ** listaMesas, int numMesa){
+void desocuparMesa(nodoMesa ** listaMesas, int numMesa)
+{
     int flag=0;
-    if(*listaMesas){
+    if(*listaMesas)
+    {
         nodoMesa * cursor=*listaMesas;
-        while (cursor && flag==0) {
-            if(cursor->mesa.numero==numMesa){
+        while (cursor && flag==0)
+        {
+            if(cursor->mesa.numero==numMesa)
+            {
                 cursor->mesa.ocupada=0;
                 flag=1;
-            }else{
+            }
+            else
+            {
                 cursor=cursor->sig;
             }
         }
     }
 }
 
-int chequearMesaOcupada(nodoMesa * listaMesa, int numMesa){
+int chequearMesaOcupada(nodoMesa * listaMesa, int numMesa)
+{
     int flag=0;
-    if(listaMesa){
-        while (listaMesa&&!flag) {
-            if(listaMesa->mesa.numero==numMesa && listaMesa->mesa.ocupada){
+    if(listaMesa)
+    {
+        while (listaMesa&&!flag)
+        {
+            if(listaMesa->mesa.numero==numMesa && listaMesa->mesa.ocupada)
+            {
                 flag=1;
-            }else{
+            }
+            else
+            {
                 listaMesa=listaMesa->sig;
             }
         }
