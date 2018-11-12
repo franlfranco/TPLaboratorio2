@@ -24,15 +24,19 @@ Nuestro sistema permite la gestión de cuentas activas, ventas en barra y lista 
         2. Todas
         3. Ocupadas
         4. Libres
-        5. Tabla
+        5. Reporte mesas
 3. Productos
     1. Alta
     2. Baja
     3. Modificación
     4. Listado por producto
-    5. Venta en barra
+    5. Reporte productos
+    6. Venta en barra
 4. Cuentas
     1. Listado cuentas activas
+        1.Inorder
+        2.Preorder
+        3.Posorder
     2. Agregar productos
     3. Quitar productos
     4. Cerrar cuenta
