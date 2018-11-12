@@ -84,7 +84,6 @@ void mostrarFilaEspera (Fila espera)
     system("cls");
     tituloPrincipal();
     mostrarListaCliente(espera.cabecera);
-
     printf("\n\n[Primero]");
     mediaLinea();
     printf("[Fila de espera]");
@@ -207,12 +206,15 @@ void altaCliente(arbolCuenta ** arbolCuentas, nodoMesa * * listaMesa, Fila * esp
         lineaVerde();
         printf("Cliente a la fila\n");
         lineaVerde();
+        printf("\n\n\n\n\n\n\n\n");
         system("pause");
     }
 }
 
 void atencionClienteEspera(nodoMesa ** listaMesa, Fila * espera, arbolCuenta ** arbolCuentas)
 {
+    system("cls");
+    tituloPrincipal();
     if(chequearDisponibilidadMesas(*listaMesa))
     {
         if(espera->cabecera)
@@ -222,12 +224,20 @@ void atencionClienteEspera(nodoMesa ** listaMesa, Fila * espera, arbolCuenta ** 
         }
         else
         {
+            lineaVerde();
             printf("La fila esta vacia.\n");
+            lineaVerde();
+            printf("\n\n\n\n\n");
+            system("pause");
         }
     }
     else
     {
-        printf("No hay mesas libres.\n");
+        lineaRoja();
+        printf("No hay mesas libres.\n\a");
+        lineaRoja();
+        printf("\n\n\n\n\n");
+        system("pause");
     }
 }
 
@@ -262,7 +272,9 @@ int eliminarNodoClienteDeFila (nodoCliente * * espera,char nombre[]) ///MODIFICA
                 cursor=cursor->sig;
                 ante->sig=cursor;
                 if(cursor)
+                {
                     cursor->ante=ante;
+                }
                 free(aborrar);
                 flag=1;
             }
@@ -276,6 +288,8 @@ void bajaClienteEspera(Fila * espera)
     if(espera->cabecera)
     {
         char nombre[30];
+        system("cls");
+        tituloPrincipal();
         printf("Ingrese el nombre de la persona que desea eliminar de la fila: ");
         fflush(stdin);
         scanf("%s",nombre);
@@ -283,12 +297,28 @@ void bajaClienteEspera(Fila * espera)
         if(strcmp(ultimo->cliente.nombre,nombre)==0)
             ultimo=ultimo->ante;
         if(eliminarNodoClienteDeFila(&espera->cabecera,nombre))
+        {
+            printf("\n\n");
+            lineaVerde();
             printf("Se elimino a %s con exito.\n",nombre);
+            lineaVerde();
+            printf("\n\n\n\n\n");
+            system("pause");
+        }
         else
-            printf("No se encuentra el nombre %s en la fila.\n",nombre);
+        {
+            printf("\n\n");
+            lineaRoja();
+            printf("No se encuentra el nombre %s en la fila.\n\a",nombre);
+            lineaRoja();
+            printf("\n\n\n\n\n");
+            system("pause");
+        }
     }
     else
+    {
         printf("No hay nadie en la fila de espera.\n");
+    }
 }
 
 void mostrarClientesYMesas (arbolCuenta * comanda)  ///MUESTRA NRO MESA Y CLIENTE
@@ -321,12 +351,18 @@ int chequearCliente (arbolCuenta * arbolcuentas,Fila espera,char nombreNuevo[])
     {
         aux=cliente->cliente;
         if(strcmp(aux.nombre,nombreNuevo)==0)
+        {
             flag=1;
+        }
         else
+        {
             cliente=cliente->sig;
+        }
     }
     busqueda=buscarComandaPorCliente(arbolcuentas,nombreNuevo);
     if(busqueda)
+    {
         flag=1;
+    }
     return flag;
 }
