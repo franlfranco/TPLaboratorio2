@@ -6,6 +6,61 @@
 #include "Menu.h"
 #include "windows.h"
 
+void menuMostrarArbol(arbolCuenta * arbolCuentas){
+    char repite = 1;
+    int opcion = -1;
+
+    do {
+        system("cls");//NO FUNCIONA EN MAC, SOLO EN WINDOWS
+        menuMuestraComandaUi();
+        fflush(stdin);
+        scanf(" %i",&opcion );
+
+        switch (opcion) {
+
+            case 1:
+                system("cls");
+                tituloPrincipal();
+                mostrarArbolComandaPreOrden(arbolCuentas);
+                system("pause");
+                break;
+
+            case 2:
+                system("cls");
+                tituloPrincipal();
+                mostrarArbolComandaenOrden(arbolCuentas);
+                system("pause");
+                break;
+
+            case 3:
+                system("cls");
+                tituloPrincipal();
+                mostrarArbolComandaPostOrden(arbolCuentas);
+                system("pause");
+                break;
+            case 0:
+                repite = 0;
+                break;
+        }
+
+    } while (repite);
+}
+
+void menuMuestraComandaUi()
+{
+    linea();
+    printf("\n\n\t\t\t\t\t[#La Vaca Bar Muestra de Comanda]\n\n\n");
+    linea();
+    printf("  [ 1 ]\t Pre-orden \n");
+    linea();
+    printf("  [ 2 ]\t In-orden \n");
+    linea();
+    printf("  [ 3 ]\t Post-orden \n");
+    linea();
+    printf("  [ 0 ]\t Volver al menu anterior \n");
+    linea();
+}
+
 void menuCuentas(arbolCuenta ** arbolCuentas,nodoProd ** listaProductos, nodoMesa ** listaMesa){
     char repite = 1;
     int opcion = -1;
@@ -19,7 +74,8 @@ void menuCuentas(arbolCuenta ** arbolCuentas,nodoProd ** listaProductos, nodoMes
         switch (opcion) {
 
             case 1:
-                mostrarArbolComandaenOrden(*arbolCuentas);
+                menuMostrarArbol(*arbolCuentas);
+                system("pause");
                 break;
 
             case 2:
@@ -34,6 +90,7 @@ void menuCuentas(arbolCuenta ** arbolCuentas,nodoProd ** listaProductos, nodoMes
 
             case 4:
                 cerrarCuenta(arbolCuentas, listaMesa, listaProductos, aProductos);
+                system("pause");
                 break;
 
 
@@ -81,6 +138,7 @@ void menuProductos(nodoProd * * listaProductos){
 
             case 2:
                 bajaProducto(listaProductos,aProductos);
+                system("pause");
                 break;
             case 3:
                 modificarProducto(aProductos,listaProductos);
@@ -89,6 +147,7 @@ void menuProductos(nodoProd * * listaProductos){
 
             case 4:
                 mostrarListProductos(*listaProductos);
+                system("pause");
                 //mostrarProductos();
                 break;
 
@@ -195,10 +254,12 @@ void menuListadoMesas(nodoMesa * listaMesa, arbolCuenta * arbolCuentas){
 
             case 3:
                 mostrarMesasLibres(listaMesa);
+                system("pause");
                 break;
 
             case 4:
                 mostrarMesasOcupadas(listaMesa);
+                system("pause");
                 break;
 
             case 5:
@@ -348,6 +409,7 @@ void menuClientes(nodoMesa ** listaMesa, arbolCuenta ** arbolCuentas, Fila * esp
 
             case 2:
                 atencionClienteEspera(listaMesa, espera, arbolCuentas);
+                system("pause");
                 break;
 
             case 3:

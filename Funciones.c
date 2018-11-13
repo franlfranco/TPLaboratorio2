@@ -22,11 +22,6 @@ void tituloPrincipal()
     linea();
 }
 
-
-
-
-
-
 void linea()
 {
     int color=9;

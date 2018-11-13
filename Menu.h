@@ -12,6 +12,10 @@
 #include "Productos.h"
 #include "Comanda.h"
 
+void menuMostrarArbol(arbolCuenta * arbolCuentas);
+
+void menuMuestraComandaUi();
+
 void menuCuentas(arbolCuenta ** arbolCuentas,nodoProd ** listaProductos, nodoMesa ** listaMesa);
 
 void menuProductos(nodoProd * * listaProductos);

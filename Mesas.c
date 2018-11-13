@@ -166,7 +166,6 @@ void mostrarMesasLibres (nodoMesa * lista) ///MUESTRA MESAS LIBRES, RETORNA CANT
         }
         lista=lista->sig;
     }
-    system("pause");
 }
 
 nodoMesa * bajaMesaLista(nodoMesa * listaMesa)
@@ -332,8 +331,8 @@ void mostrarMesaIndividualXNumero(nodoMesa * listaMesa, arbolCuenta * arbolCuent
         lineaRoja();
         printf("La mesa no existe.\n");
         lineaRoja();
-        system("pause");
     }
+    system("pause");
 }
 
 void mostrarMesaIndividualXNombre(nodoMesa * listaMesa, arbolCuenta * arbolCuentas)
@@ -355,6 +354,7 @@ void mostrarMesaIndividualXNombre(nodoMesa * listaMesa, arbolCuenta * arbolCuent
     {
         printf("\nEl cliente ingresado no se encuentra ocupando una mesa.\n");
     }
+    system("pause");
 }
 
 void mostrarTodasLasMesas (nodoMesa * listaMesas,arbolCuenta * arbolCuentas)
@@ -394,7 +394,6 @@ void mostrarMesasOcupadas (nodoMesa * lista) ///MUESTRA MESAS OCUPADAS
         }
         lista=lista->sig;
     }
-    system("pause");
 }
 
 void mostrarEstadisticasMesas(nodoMesa * listaMesas, arbolCuenta * arbolCuentas)

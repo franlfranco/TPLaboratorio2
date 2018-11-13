@@ -50,12 +50,16 @@ Producto altaProductoArchivo(char archivoProducto[]){ ///AGREGA UN PRODUCTO AL A
     do
     {
         do {
+            system("cls");
+            tituloPrincipal();
             printf("Ingrese nombre del producto nuevo: \n");
             fflush(stdin);
             scanf("%s",nuevo.nombre);
             if(chequearProducto(archivoProducto, nuevo.nombre))
             {
-                printf("El nombre del producto ya existe, elija otro\n");
+                lineaRoja();
+                printf("El nombre del producto ya existe, elija otro\n\a");
+                lineaRoja();
                 system("pause");
             }
         } while (chequearProducto(archivoProducto, nuevo.nombre));
@@ -179,10 +183,10 @@ void bajaProducto(nodoProd * * listaProd,char archivoProducto[]){ ///DE LISTA A 
             *listaProd=bajaListaProd(*listaProd, nombre);
             bajaArchivoProducto(aProductos,*listaProd);
         }else{
-            printf("\nNo se encontro el producto buscado");
+            printf("\nNo se encontro el producto buscado\n");
         }
     }else{
-        printf("\nNo hay productos cargados");
+        printf("\nNo hay productos cargados\n");
     }
 }
 
@@ -301,15 +305,22 @@ void modificarProducto (char nombreArchivo[],nodoProd * * listaProductos)
     int opc;
     int cantVendidos;
     float precio;
-    printf("Ingrese el nombre del producto a cambiar: ");
+    system("cls");
+    tituloPrincipal();
+    printf("Ingrese el nombre del producto a cambiar: \n");
+    linea();
     scanf("%s",&nombreProducto);
     if(chequearProducto(nombreArchivo,nombreProducto))
     {
-        printf("\nSeleccione que campo desea cambiar:\n");
-        printf("1- Nombre del producto\n");
-        printf("2- Precio\n");
-        printf("3- Cantidad vendidos\n");
-        printf("0- Cancelar\n");
+        printf("Seleccione que campo desea cambiar:\n");
+        printf("[ 1 ] Nombre del producto\n");
+        linea();
+        printf("[ 2 ] Precio\n");
+        linea();
+        printf("[ 3 ] Cantidad vendidos\n");
+        linea();
+        printf("[ 0 ] Cancelar\n");
+        linea();
         fflush(stdin);
         scanf("%i",&opc);
         switch(opc)
@@ -365,29 +376,37 @@ void ventaEnBarra (nodoProd * * cartaProductos,char archivoProductos[])
         printf("\n--------------------Carta--------------------\n");
         mostrarListProductos(*cartaProductos);
         printf("\n--------------------Carta--------------------\n");
-        printf("Ingrese nombre del producto que desea agregar a las ventas en la barra: ");
-        fflush(stdin);
-        scanf("%s",&nombreProducto);
-        if(chequearProducto(archivoProductos,nombreProducto))
+
+        if(*cartaProductos)
         {
-            nodoProd * aux=retornarNodoProductoDeLista(*cartaProductos,nombreProducto);
-            int nuevaCant=aux->prod.cantVendidos;
-            nuevaCant++;
-            if(cambiarCantVendidosProductoLista(cartaProductos,nombreProducto,nuevaCant))
+            printf("Ingrese nombre del producto que desea agregar a las ventas en la barra: ");
+            fflush(stdin);
+            scanf("%s",&nombreProducto);
+            if(chequearProducto(archivoProductos,nombreProducto))
             {
-                cambiarProductoArchivo(*cartaProductos,archivoProductos);
-                printf("\nProducto agregado con exito.\n");
+                nodoProd * aux=retornarNodoProductoDeLista(*cartaProductos,nombreProducto);
+                int nuevaCant=aux->prod.cantVendidos;
+                nuevaCant++;
+                if(cambiarCantVendidosProductoLista(cartaProductos,nombreProducto,nuevaCant))
+                {
+                    cambiarProductoArchivo(*cartaProductos,archivoProductos);
+                    printf("\nProducto agregado con exito.\n");
+                }
+                else
+                    printf("\nError\n");
             }
             else
-                printf("\nError\n");
+            {
+                printf("\nNo se encuentra el nombre del producto ingresado...\n");
+            }
+            printf("\nDesea agregar otro producto? ingrese s:  ");
+            fflush(stdin);
+            scanf(" %c",&control);
         }
         else
-        {
-            printf("\nNo se encuentra el nombre del producto ingresado...\n");
-        }
-        printf("\nDesea agregar otro producto? ingrese s:  ");
-        fflush(stdin);
-        scanf(" %c",&control);
+            control='n';
+        system("pause");
+
     }
     while(control=='s');
 
@@ -406,6 +425,7 @@ return total;
 
 void mostrarEstadisticasProductos (nodoProd * listaProductos)
 {
+    system("cls");
     if(listaProductos)
     {
         int n=contarCantVendidosTodaLista(listaProductos);
@@ -413,22 +433,30 @@ void mostrarEstadisticasProductos (nodoProd * listaProductos)
         float porcentaje;
         Producto aux;
         printf("\nPorcentaje de venta de productos\n");
+        linea();
         printf("Producto            | Cant. Vendida | Ingresos generados | Porcentaje \n");
-        printf("-------------------------------------------------------------\n");
+        linea();
         while(listaProductos)
         {
-            aux=listaProductos->prod;
-            ganancia=(float)aux.cantVendidos*aux.precio;
-            porcentaje=(float)(aux.cantVendidos*100)/n;
-            printf("%s | %i | $ %.2f | %.2f %% \n",aux.nombre,aux.cantVendidos,ganancia,porcentaje);
-            printf("-------------------------------------------------------------\n");
-            listaProductos=listaProductos->sig;
+            if(n>0)
+            {
+                aux=listaProductos->prod;
+                ganancia=(float)aux.cantVendidos*aux.precio;
+                porcentaje=(float)(aux.cantVendidos*100)/n;
+                printf("%s | %i | $ %.2f | %.2f %% \n",aux.nombre,aux.cantVendidos,ganancia,porcentaje);
+                linea();
+
+            }
+                listaProductos=listaProductos->sig;
         }
     }
     else
     {
-        printf("\nNo hay productos cargados\n");
+        lineaRoja();
+        printf("No hay productos cargados\n");
+        lineaRoja();
     }
+    system("pause");
 }
 
 void cierreListaProductos (nodoProd * listaProductos,nodoProd * * carta,char archivoProductos[])

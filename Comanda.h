@@ -18,6 +18,10 @@ float sumarPreciosProd (nodoProd * lista); ///RETORNA FLOAT DE TOTAL DE CUENTA
 
 void mostrarComanda (arbolCuenta * comanda); ///MUESTRA NRO MESA, CLIENTE Y LA LISTA DE PEDIDOS -> mostrarcuenta()
 
+void mostrarArbolComandaPostOrden(arbolCuenta * arbol); ///MUESTRA EL ARBOL DE COMANDAS POST ORDEN -> mostrarComanda()
+
+void mostrarArbolComandaPreOrden (arbolCuenta * arbol); ///MUESTRA EL ARBOL DE COMANDAS PRE ORDEN ->mostrarComanda()
+
 void mostrarArbolComandaenOrden (arbolCuenta * arbol);///MUESTRA EL ARBOL DE COMANDAS ->mostrarComanda()
 
 arbolCuenta * crearHojaComanda(Mesa mesa,Cliente cliente); //Crea un nodoArbol para insertar en el arbol

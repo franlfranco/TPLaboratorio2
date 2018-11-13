@@ -26,13 +26,14 @@ arbolCuenta * agregarHojaArbolCuentas (arbolCuenta * arbol,arbolCuenta * nuevo){
 
 void mostrarCuenta (nodoProd * lista){ ///MUESTRA LA LISTA DE PRODUCTOS PEDIDOS POR EL CLIENTE
     nodoProd * cursor=lista;
-    printf("\n----------------Productos--------------------\n");
+    printf("Productos:\n");
+    linea();
     while(cursor){
         printf("%s  ||$ %.2f\n",cursor->prod.nombre,cursor->prod.precio);
         cursor=cursor->sig;
     }
     printf("\n\nTotal : $ %.2f\n",sumarPreciosProd(lista));
-    printf("\n---------------------------------------------\n");
+    linea();
 }
 
 float sumarPreciosProd (nodoProd * lista){ ///RETORNA FLOAT DE TOTAL DE CUENTA
@@ -46,11 +47,11 @@ float sumarPreciosProd (nodoProd * lista){ ///RETORNA FLOAT DE TOTAL DE CUENTA
 
 void mostrarComanda (arbolCuenta * comanda){ ///MUESTRA NRO MESA, CLIENTE Y LA LISTA DE PEDIDOS -> mostrarcuenta()
     if(comanda){
-        printf("\n=======================================================================\n");
+        linea();
         printf("\nMesa nro: %i\n",comanda->mesa.numero);
         printf("Cliente: %s\n",comanda->cliente.nombre);
         mostrarCuenta(comanda->listaProd);
-        printf("\n=======================================================================\n");
+        linea();
     }
 }
 
@@ -62,6 +63,25 @@ void mostrarArbolComandaenOrden (arbolCuenta * arbol){ ///MUESTRA EL ARBOL DE CO
     }
 }
 
+void mostrarArbolComandaPostOrden (arbolCuenta * arbol)  ///MUESTRA EL ARBOL DE COMANDAS ->mostrarComanda()
+{
+    if(arbol)
+    {
+        mostrarArbolComandaenOrden(arbol->izq);
+        mostrarArbolComandaenOrden(arbol->der);
+        mostrarComanda(arbol);
+    }
+}
+
+void mostrarArbolComandaPreOrden (arbolCuenta * arbol)  ///MUESTRA EL ARBOL DE COMANDAS ->mostrarComanda()
+{
+    if(arbol)
+    {
+        mostrarComanda(arbol);
+        mostrarArbolComandaenOrden(arbol->izq);
+        mostrarArbolComandaenOrden(arbol->der);
+    }
+}
 arbolCuenta * crearHojaComanda(Mesa mesa,Cliente cliente){ ///CREA UNA COMANDA EN BASE A MESA Y CLIENTE, GENERA LISTA DE PEDIDOS VACIA
     arbolCuenta * aux=(arbolCuenta*)malloc(sizeof(arbolCuenta));
     aux->mesa=mesa;
@@ -104,7 +124,9 @@ arbolCuenta * ingresarClienteANodoArbol (nodoMesa * * listaMesa, Cliente nuevoCl
 
         if(!ocuparMesa(listaMesa,&mesa,elegir))//retorna 1 si la mesa esta libre
         {
-            printf("\nEl numero de mesa ingresada es incorrecto o esta ocupada. Ingrese nuevamente\n");
+            lineaRoja();
+            printf("El numero de mesa ingresada es incorrecto o esta ocupada. Ingrese nuevamente\n");
+            lineaRoja();
             system("pause");
             system("cls");
         }
@@ -113,7 +135,9 @@ arbolCuenta * ingresarClienteANodoArbol (nodoMesa * * listaMesa, Cliente nuevoCl
     }while(flag==0);
     nuevo=crearHojaComanda(mesa,nuevoCliente);
     nuevo->cliente.atendido=1;
+    lineaVerde();
     printf("El cliente: %s fue asignado a la mesa: %i \n",nuevo->cliente.nombre,nuevo->mesa.numero);
+    lineaVerde();
     return nuevo;
 }
 
@@ -386,5 +410,4 @@ void cerrarCuenta(arbolCuenta ** arbolCuentas, nodoMesa ** listaMesa, nodoProd *
     }
     else
         printf("\nNo hay ninguna cuenta activa.");
-
 }
