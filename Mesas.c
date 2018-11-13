@@ -139,8 +139,6 @@ nodoMesa * archivoToListaMesa (char archivoMesas[], nodoMesa * listaMesa)  ///CA
 
 void mostrarMesa(int nro, int ocupada, char nombreCliente[30])
 {
-    system("cls");
-    tituloPrincipal();
     printf("Numero mesa: %i",nro);
     if (ocupada)
     {
@@ -310,8 +308,10 @@ int chequearExistenciaMesa(nodoMesa * listaMesa, int nro)
 void mostrarMesaIndividualXNumero(nodoMesa * listaMesa, arbolCuenta * arbolCuentas)
 {
     int nro;
-
-    printf("\nIngrese el numero de mesa a mostrar: ");
+    system("cls");
+    tituloPrincipal();
+    printf("Ingrese el numero de mesa a mostrar: \n");
+    linea();
     fflush(stdin);
     scanf("%i",&nro);
     if (chequearExistenciaMesa(listaMesa, nro))
@@ -329,7 +329,10 @@ void mostrarMesaIndividualXNumero(nodoMesa * listaMesa, arbolCuenta * arbolCuent
     }
     else
     {
+        lineaRoja();
         printf("La mesa no existe.\n");
+        lineaRoja();
+        system("pause");
     }
 }
 
@@ -357,6 +360,8 @@ void mostrarMesaIndividualXNombre(nodoMesa * listaMesa, arbolCuenta * arbolCuent
 void mostrarTodasLasMesas (nodoMesa * listaMesas,arbolCuenta * arbolCuentas)
 {
     arbolCuenta * aux;
+    system("cls");
+    tituloPrincipal();
     while(listaMesas)
     {
         if(listaMesas->mesa.ocupada==0)
@@ -370,6 +375,8 @@ void mostrarTodasLasMesas (nodoMesa * listaMesas,arbolCuenta * arbolCuentas)
         }
         listaMesas=listaMesas->sig;
     }
+    printf("\n\n\n\n");
+    system("pause");
 }
 
 void mostrarMesasOcupadas (nodoMesa * lista) ///MUESTRA MESAS OCUPADAS
@@ -398,7 +405,7 @@ void mostrarEstadisticasMesas(nodoMesa * listaMesas, arbolCuenta * arbolCuentas)
         float gastosTotales=sumarGastosMesas(arbolCuentas);
         system("cls");
         tituloPrincipal();
-        printf("\tMontos por mesas\n");
+        printf("Montos por mesas\n");
         linea();
         printf("\tNumero | Total | Frecuencia relativa\n");
         linea();
@@ -437,7 +444,9 @@ void mostrarEstadisticasMesas(nodoMesa * listaMesas, arbolCuenta * arbolCuentas)
     }
     else
     {
+        lineaRoja();
         printf("No hay mesas cargadas.\n");
+        lineaRoja();
     }
     system("pause");
 }
